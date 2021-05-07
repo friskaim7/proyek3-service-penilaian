@@ -6,7 +6,6 @@ module.exports = {
       parent: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: id_kategori,
       },
       nama_kategori: {
         type: Sequelize.STRING,
@@ -18,6 +17,11 @@ module.exports = {
           key:'id_matakuliah',
         },
         allowNull: false,
+      },
+      id_kategori: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey:true
       },
       bobot_nilai: {
         type: Sequelize.STRING,
@@ -38,7 +42,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references:{
           model:'Kategori_nilai',
-          key:'id_kategori',
+          key:'id_Kategori',
         }
       },
       nilai: {
