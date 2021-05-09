@@ -21,6 +21,7 @@ module.exports = {
       id_kategori: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primarykey:true
       },
       bobot_nilai: {
         type: Sequelize.STRING,
@@ -47,7 +48,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Kategori_Nilai');
     await queryInterface.dropTable('Nilai');
+    await queryInterface.dropTable('Kategori_Nilai');
   }
 };
