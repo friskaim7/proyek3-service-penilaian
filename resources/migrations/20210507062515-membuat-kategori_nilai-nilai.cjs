@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       id_mata_kuliah: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references:{
           model:'Mata_Kuliah',
           key:'id_mata_kuliah',
@@ -21,7 +21,6 @@ module.exports = {
       id_kategori: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey:true
       },
       bobot_nilai: {
         type: Sequelize.STRING,
@@ -32,17 +31,13 @@ module.exports = {
       id_nilai: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{
-          model:"Mahasiswa",
-          key:"id_nilai",
-        },
         primaryKey: true
       },
       id_kategori: {
         type: Sequelize.INTEGER,
         references:{
           model:'Kategori_Nilai',
-          key:'id_Kategori',
+          key:'id_kategori',
         }
       },
       nilai: {
