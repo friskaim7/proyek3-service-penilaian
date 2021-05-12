@@ -21,7 +21,7 @@ module.exports = {
       id_kategori: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primarykey:true
+        primaryKey:true
       },
       bobot_nilai: {
         type: Sequelize.STRING,
