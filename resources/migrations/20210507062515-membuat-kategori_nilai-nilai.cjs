@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Kategori_nilai', {
+    await queryInterface.createTable('Kategori_Nilai', {
       parent: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -11,10 +11,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       id_mata_kuliah: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references:{
-          model:'Mata_kuliah',
-          key:'id_matakuliah',
+          model:'Mata_Kuliah',
+          key:'id_mata_kuliah',
         },
         allowNull: false,
       },
@@ -32,17 +32,13 @@ module.exports = {
       id_nilai: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{
-          model:"Mahasiswa",
-          key:"id_nilai",
-        },
         primaryKey: true
       },
       id_kategori: {
         type: Sequelize.INTEGER,
         references:{
-          model:'Kategori_nilai',
-          key:'id_Kategori',
+          model:'Kategori_Nilai',
+          key:'id_kategori',
         }
       },
       nilai: {
@@ -52,7 +48,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Kategori_nilai');
     await queryInterface.dropTable('Nilai');
+    await queryInterface.dropTable('Kategori_Nilai');
   }
 };
