@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import db from '../db'
 
-const Prodi = db.define('Kategori_Nilai', {
+const Kategori_Nilai = db.define('Kategori_Nilai', {
   parent: {
     type: Sequelize.STRING,
     allowNull: false,

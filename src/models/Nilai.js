@@ -2,7 +2,7 @@ import Sequelize from 'sequelize'
 
 import db from '../db'
 
-const Studi = db.define('Nilai', {
+const Nilai = db.define('Nilai', {
   id_nilai: {
     type: Sequelize.INTEGER,
     allowNull: false,
