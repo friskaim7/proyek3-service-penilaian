@@ -1,6 +1,5 @@
 'use strict';
 
-const { UniqueConstraintError } = require("sequelize/types");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
