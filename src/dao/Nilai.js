@@ -12,6 +12,8 @@ export const insertOneNilai = async (
   email,
   permissions,
   username*/
+  id_nilai,
+  Nilai
 ) => {
   try {
     const nilai = await Nilai.create({
@@ -21,6 +23,8 @@ export const insertOneNilai = async (
       email,
       permissions,
       username*/
+	  id_nilai,
+	  nilai
     })
     return nilai
   } catch (error) {
@@ -80,7 +84,7 @@ export const findAllNilai = async () => {
 
 export const destroyNilaiByMahasiswa = async (NIP) => {
   try {
-    const mahassiswa = await Mahasiswa_nilai.destroy({
+    const mahasiswa = await Mahasiswa_nilai.destroy({
       where: {
         /*NIP*/
       }

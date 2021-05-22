@@ -15,6 +15,5 @@ router.get('/searchByNIM/:NIM', MahasiswaController.searchMahasiswaByNIM)
 router.post('/new-nilai',)
 router.delete('/delete-nilaiByMahasiswa/:id_nilai',)
 router.get('/AllNilai',)
-router.get('/getOne/:id_nilai',)
-router.get('searchByKategori/:id_kategori',)
+
 export default router
