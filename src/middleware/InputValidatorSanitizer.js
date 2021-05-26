@@ -59,6 +59,10 @@ export const createUser = [
   body('role', 'Role wajib diisi').exists()
 ]
 
+export const postNewNilai=[
+  body('Nilai', 'Nilai Wajib diisi').exists()
+]
+
 export const deleteDosenByNIP = [
   param('NIP').custom((value) => {
     return DosenDAO.findDosenByNIP(value).then((dosen) => {

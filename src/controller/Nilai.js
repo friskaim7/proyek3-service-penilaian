@@ -4,6 +4,9 @@ import { validationResult } from 'express-validator/check'
 export const postNewNilai = async (req, res, next) => {
   try {
     const {
+	  id_nilai,
+	  Nilai
+	  /*
       NIM,
       namaMahasiswa,
       angkatan,
@@ -12,7 +15,7 @@ export const postNewNilai = async (req, res, next) => {
       nomorHp,
       urlFoto,
       status,
-      username
+      username*/
     } = req.body
     const error = validationResult(req)
 
@@ -22,7 +25,9 @@ export const postNewNilai = async (req, res, next) => {
     }
 
     const nilai = await NilaiDAO.insertOneNilai(
-      NIM,
+	  id_nilai,
+	  Nilai
+      /*NIM,
       namaMahasiswa,
       parseInt(angkatan),
       parseInt(tingkat),
@@ -30,7 +35,7 @@ export const postNewNilai = async (req, res, next) => {
       nomorHp,
       urlFoto,
       status,
-      username
+      username*/
     )
 
     if (typeof nilai === 'undefined') {
