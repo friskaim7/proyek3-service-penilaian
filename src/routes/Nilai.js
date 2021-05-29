@@ -12,9 +12,10 @@ router.get('/searchByName/:nama', MahasiswaController.searchMahasiswaByName)
 router.get('/searchByNIM/:NIM', MahasiswaController.searchMahasiswaByNIM)
 */
 
-router.post('/new-nilai',ValidatorSanitizer.pos)
-router.delete('/delete-nilaiByMahasiswa/:id_nilai',)
-router.get('/AllNilai',)
-router.get('/One-nilaiByMahasiswa'
+router.post('/new-nilai',ValidatorSanitizer.postNewNilai, NilaiController.postNewNilai)
+router.delete('/delete-nilaiByMahasiswa/:id_nilai',NilaiController.deleteNilaibyMahasiswa)
+router.put('/update-nilai/:id_nilai',ValidatorSanitizer.updateNilaiMahasiswa, NilaiController.updateNilaibyMahasiswa)
+router.get('/AllNilai', NilaiController.getAllNilai)
+router.get('/One-nilaibyMahasiswa/:NIM', NilaiController.getOneNilaibyMahasiswa)
 
 export default router

@@ -1,11 +1,11 @@
-import * as MahasiswaDAO from '../dao/Nilai'
+import * as NilaiDAO from '../dao/Nilai'
 import { validationResult } from 'express-validator/check'
 
 export const postNewNilai = async (req, res, next) => {
   try {
     const {
 	  id_nilai,
-	  Nilai
+	  nilai
 	  /*
       NIM,
       namaMahasiswa,
@@ -26,7 +26,7 @@ export const postNewNilai = async (req, res, next) => {
 
     const nilai = await NilaiDAO.insertOneNilai(
 	  id_nilai,
-	  Nilai
+	  nilai
       /*NIM,
       namaMahasiswa,
       parseInt(angkatan),
@@ -89,11 +89,34 @@ export const getAllNilai = async (req, res, next) => {
     next(error)
   }
 }
-/*
-export const getOneMahasiswaByNIM = async (req, res, next) => {
+
+export const updateNilaibyMahasiswa = async (req, res, next) => {
+  try {
+    const { id_mahasiswa } = req.params
+    const updateNilai = await NilaiDAO.updateNilaibyMahasiswa(id_mahasiswa, req.body.nilai)
+    if (updateNilai === 1) {
+      const nilai = await NilaiDAO.findNilaibyMahasiswa(id_mahasiswa)
+      res.status(200).json({
+        message: 'Update Nilai Mahasiswa berhasil',
+        data: {
+          nilai
+        }
+      })
+    } else {
+      const error = new Error('Update Nilai Mahasiswa gagal')
+      error.statusCode = 500
+      error.cause = 'Update Nilai Mahasiswa gagal'
+      throw error
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getOneNilaibyMahasiswa = async (req, res, next) => {
   try {
     const { NIM } = req.params
-    const mahasiswa = await MahasiswaDAO.findOneMahasiswaByNIM(NIM)
+    const nilai = await NilaiDAO.findOneNilaibyMahasiswa(NIM)
     res.status(200).json({
       message: 'get one Mahasiswa by NIM success',
       data: {
@@ -104,7 +127,7 @@ export const getOneMahasiswaByNIM = async (req, res, next) => {
     next(error)
   }
 }
-
+/*
 export const searchMahasiswaByName = async (req, res, next) => {
   try {
     const { nama } = req.params

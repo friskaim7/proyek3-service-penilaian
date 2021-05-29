@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.createTable('Kategori_Nilai', {
       parent: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       nama_kategori: {
         type: Sequelize.STRING,

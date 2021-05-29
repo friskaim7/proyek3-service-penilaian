@@ -1,6 +1,6 @@
 import Kategori_Nilai from '../models/Kategori_Nilai.js'
 import Nilai from '../models/Nilai.js'
-import Nilai from '../models/Mahasiswa.js'
+import Mahasiswa from '../models/Mahasiswa.js'
 
 import sequelize from '../db.js'
 
@@ -13,7 +13,7 @@ export const insertOneNilai = async (
   permissions,
   username*/
   id_nilai,
-  Nilai
+  nilai
 ) => {
   try {
     const nilai = await Nilai.create({
@@ -32,18 +32,18 @@ export const insertOneNilai = async (
   }
 }
 
-/*export const findDosenByNIP = async (NIP) => {
+export const findOneNilaibyMahasiswa= async (NIM) => {
   try {
-    const dosen = await Dosen.findAll({
+    const nilai = await Nilai.findAll({
       where: {
-        NIP
+        NIM
       }
     })
-    return dosen[0]
+    return nilai[0]
   } catch (error) {
-    return Promise.reject(new Error('Find dosen by NIP gagal'))
+    return Promise.reject(new Error('Find nilai by Mahasiswa gagal'))
   }
-}*/
+}
 
 export const findAllNilai = async () => {
   try {
@@ -54,42 +54,33 @@ export const findAllNilai = async () => {
   }
 }
 
-/*export const findDosenByJabatan = async (jabatanDosen) => {
+export const updateNilaibyMahasiswa = async (NIM, nilai) => {
   try {
-    if (jabatanDosen === '') {
-      jabatanDosen = null
-      const dosenNoJabatan = await Dosen.findAll({
-        where: {
-          jabatan: null
-        },
-        order: [
-          ['nama_dosen', 'ASC']
-        ]
-      })
-      return dosenNoJabatan
-    }
-    const dosen = await Dosen.findAll({
-      where: {
-        jabatan: sequelize.where(sequelize.fn('LOWER', sequelize.col('jabatan')), 'LIKE', '%' + jabatanDosen.toLowerCase() + '%')
+    const nilai_mahasiswa = await Nilai.update(
+      {
+        nilai_mahasiswa: nilai
       },
-      order: [
-        ['nama_dosen', 'ASC']
-      ]
-    })
-    return dosen
+      {
+        where: {
+          NIM
+        },
+        silent: true
+      }
+    )
+    return nilai_mahasiswa[0]
   } catch (error) {
-    return Promise.reject(new Error('Find dosen by jabatan gagal'))
+    console.error(error)
   }
-}*/
+}
 
-export const destroyNilaiByMahasiswa = async (NIP) => {
+export const destroyNilaiByMahasiswa = async (NIM) => {
   try {
-    const mahasiswa = await Mahasiswa_nilai.destroy({
+    const nilai = await Mahasiswa_nilai.destroy({
       where: {
-        /*NIP*/
+        NIM
       }
     })
-    return mahasiswa
+    return nilai
   } catch (error) {
     return Promise.reject(new Error('Delete Nilai by Mahasiswa gagal'))
   }

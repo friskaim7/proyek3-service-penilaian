@@ -4,7 +4,7 @@ import db from '../db'
 const Kategori_Nilai = db.define('Kategori_Nilai', {
   parent: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   nama_kategori: {
     type: Sequelize.STRING,

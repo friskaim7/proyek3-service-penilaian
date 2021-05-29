@@ -63,6 +63,12 @@ export const postNewNilai=[
   body('Nilai', 'Nilai Wajib diisi').exists()
 ]
 
+export const updateNilaiMahasiswa = [
+  body('nilai', 'Nilai wajib diisi').exists()
+  // body('nomorHP', 'Nomor HP harus maksimal 13 angka').isLength({ max: 13}),
+  // body('nomorHP', 'Nomor HP harus numerik').isNumeric(),
+]
+
 export const deleteDosenByNIP = [
   param('NIP').custom((value) => {
     return DosenDAO.findDosenByNIP(value).then((dosen) => {
