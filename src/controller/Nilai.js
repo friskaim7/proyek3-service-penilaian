@@ -4,18 +4,9 @@ import { validationResult } from 'express-validator/check'
 export const postNewNilai = async (req, res, next) => {
   try {
     const {
-	  id_nilai,
+	  id_kategori,
+	  NIM,
 	  nilai
-	  /*
-      NIM,
-      namaMahasiswa,
-      angkatan,
-      tingkat,
-      email,
-      nomorHp,
-      urlFoto,
-      status,
-      username*/
     } = req.body
     const error = validationResult(req)
 
@@ -25,17 +16,9 @@ export const postNewNilai = async (req, res, next) => {
     }
 
     const nilai = await NilaiDAO.insertOneNilai(
-	  id_nilai,
+	  id_kategori,
+	  NIM,
 	  nilai
-      /*NIM,
-      namaMahasiswa,
-      parseInt(angkatan),
-      parseInt(tingkat),
-      email,
-      nomorHp,
-      urlFoto,
-      status,
-      username*/
     )
 
     if (typeof nilai === 'undefined') {
@@ -127,34 +110,3 @@ export const getOneNilaibyMahasiswa = async (req, res, next) => {
     next(error)
   }
 }
-/*
-export const searchMahasiswaByName = async (req, res, next) => {
-  try {
-    const { nama } = req.params
-    const mahasiswa = await MahasiswaDAO.findMahasiswaByName(nama)
-    res.status(200).json({
-      message: 'find Mahasiswa by name success',
-      data: {
-        mahasiswa
-      }
-    })
-  } catch (error) {
-    next(error)
-  }
-}
-
-export const searchMahasiswaByNIM = async (req, res, next) => {
-  try {
-    const { NIM } = req.params
-    const mahasiswa = await MahasiswaDAO.findMahasiswaByNIM(NIM)
-    res.status(200).json({
-      message: 'find Mahasiswa by NIM success',
-      data: {
-        mahasiswa
-      }
-    })
-  } catch (error) {
-    next(error)
-  }
-}
-*/

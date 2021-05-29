@@ -5,28 +5,18 @@ import Mahasiswa from '../models/Mahasiswa.js'
 import sequelize from '../db.js'
 
 
-export const insertOneNilai = async (
- /* NIP,
-  namaDosen,
-  jabatan,
-  email,
-  permissions,
-  username*/
-  id_nilai,
+export const insertOneNilai = async (id_kategori,NIM,nilai) (
+  id_kategori,
+  NIM,
   nilai
 ) => {
   try {
-    const nilai = await Nilai.create({
-      /*NIP,
-      nama_dosen: namaDosen,
-      jabatan,
-      email,
-      permissions,
-      username*/
-	  id_nilai,
+    const kategori_nilai = await Kategori_Nilai.create({
+	  id_kategori,
+	  NIM,
 	  nilai
     })
-    return nilai
+    return kategori_nilai
   } catch (error) {
     return Promise.reject(new Error('Insert nilai gagal'))
   }
