@@ -5,20 +5,26 @@ import Mahasiswa from '../models/Mahasiswa.js'
 import sequelize from '../db.js'
 
 
-export const insertOneNilai = async (id_kategori,NIM,nilai) (
-  id_kategori,
-  NIM,
-  nilai
-) => {
+export const insertOneNilai = async (id_kategori,NIM,nilai) => {
   try {
-    const kategori_nilai = await Kategori_Nilai.create({
-	  id_kategori,
-	  NIM,
-	  nilai
+    const kategori_nilai = await Kategori_Nilai.findOne({
+      where : {id_kategori: id_kategori}
     })
-    return kategori_nilai
+    if(kategori_nilai === null){
+      console.log("kategori nilai tidak ditemukan")
+    }
+    const mhs = await Mahasiswa.findOne({
+        where: {nim: NIM}
+      })
+    const newNilai = await Nilai.create({
+      id_nilai: 1,
+      id_kategori: id_kategori,
+      nilai: nilai,
+      nim: NIM
+    })
+    return newNilai
   } catch (error) {
-    return Promise.reject(new Error('Insert nilai gagal'))
+    console.log(error)
   }
 }
 
