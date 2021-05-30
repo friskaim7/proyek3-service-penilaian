@@ -18,6 +18,13 @@ const Nilai = db.define('Nilai', {
   },
   nilai: {
     type: Sequelize.INTEGER
+  },
+  nim: {
+    type: Sequelize.STRING(15),
+    references:{
+      model:'Mahasiswa',
+      key:'nim',
+    }
   }
 }, {
   timestamps: false
