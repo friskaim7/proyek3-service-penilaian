@@ -11,6 +11,8 @@ module.exports = {
           model: 'Mahasiswa',
           key: 'nim'
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
     });
   },
 

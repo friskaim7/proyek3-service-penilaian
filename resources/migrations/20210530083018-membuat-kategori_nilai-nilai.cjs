@@ -39,7 +39,9 @@ module.exports = {
         references:{
           model:'Kategori_Nilai',
           key:'id_kategori',
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       nilai: {
         type: Sequelize.INTEGER
