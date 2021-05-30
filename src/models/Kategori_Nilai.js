@@ -26,6 +26,8 @@ const Kategori_Nilai = db.define('Kategori_Nilai', {
     type: Sequelize.STRING,
     allowNull: false
   }
+}, {
+  timestamps:false
 })
 
 export default Kategori_Nilai

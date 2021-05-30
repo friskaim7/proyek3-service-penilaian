@@ -6,7 +6,8 @@ const Nilai = db.define('Nilai', {
   id_nilai: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   id_kategori: {
     type: Sequelize.INTEGER,
@@ -18,6 +19,8 @@ const Nilai = db.define('Nilai', {
   nilai: {
     type: Sequelize.INTEGER
   }
+}, {
+  timestamps: false
 })
 
 export default Nilai

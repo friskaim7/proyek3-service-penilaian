@@ -15,13 +15,9 @@ export const postNewNilai = async (req, res, next) => {
       throw error
     }
 
-    const nilai = await NilaiDAO.insertOneNilai(
-	  id_kategori,
-	  NIM,
-	  nilai
-    )
+    const nilaiInsert = await NilaiDAO.insertOneNilai(id_kategori, NIM, nilai)
 
-    if (typeof nilai === 'undefined') {
+    if (typeof nilaiInsert === 'undefined') {
       error.status = 500
       error.message = 'Insert Nilai gagal'
       throw error
@@ -30,7 +26,7 @@ export const postNewNilai = async (req, res, next) => {
     res.status(200).json({
       message: 'insert nilai sukses',
       data: {
-        nilai
+        nilaiInsert
       }
     })
   } catch (error) {

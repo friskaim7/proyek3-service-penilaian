@@ -51,7 +51,7 @@ const setAssociations = () => {
     foreignKey: 'id_mata_kuliah'
   })
   mahasiswa.hasMany(nilai, {
-    foreignKey: 'id_mahasiswa'
+    foreignKey: 'nim'
   })  
    kategoriNilai.hasMany(nilai, {
     foreignKey: 'id_kategori'

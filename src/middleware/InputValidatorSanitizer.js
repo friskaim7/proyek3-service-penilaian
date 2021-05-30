@@ -60,7 +60,7 @@ export const createUser = [
 ]
 
 export const postNewNilai=[
-  body('Nilai', 'Nilai Wajib diisi').exists()
+  body('nilai', 'Nilai Wajib diisi').exists()
 ]
 
 export const updateNilaiMahasiswa = [
