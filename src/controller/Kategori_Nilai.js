@@ -4,7 +4,7 @@ import { validationResult } from 'express-validator/check'
 export const postNewKategoriNilai = async (req, res, next) => {
   try {
     const {
-      id_kategori,
+    id_kategori,
 	  parent,
 	  nama_kategori,
 	  bobot_nilai,
