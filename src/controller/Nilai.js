@@ -35,6 +35,37 @@ export const postNewNilai = async (req, res, next) => {
   }
 }
 
+export const importNilai = async (req, res, next) => {
+  try {
+
+    const dataKategori = req.body.dataKategori
+    const dataNilai = req.body.dataNilai
+
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+      error.status = 400
+      throw error
+    }
+
+    const importNilai = await NilaiDAO.importNilai(dataKategori, dataNilai)
+
+    if (typeof importNilai === 'undefined') {
+      error.status = 500
+      error.message = 'Import Nilai gagal'
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'Import nilai sukses',
+      data: {
+        importNilai
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const deleteNilaibyMahasiswa = async (req, res, next) => {
   try {
     const nilaiId = req.params.id_nilai

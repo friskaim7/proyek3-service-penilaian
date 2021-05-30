@@ -33,6 +33,33 @@ export const insertOneNilai = async (id_nilai,id_kategori,nilai,nim) => {
   }
 }
 
+export const importNilai = async (dataKategori, dataNilai) => {
+  try {
+    var dataKategori = dataKategori
+    var dataNilai = dataNilai
+
+    // dataKategori.forEach(element => {
+    //   await Kategori_Nilai.create()
+    // });
+    
+    const result = await Kategori_Nilai.bulkCreate(dataKategori)
+    const result2 = await Nilai.bulkCreate(dataNilai)
+
+    if(result === null){
+      console.log("Kategori gagal di insert")
+      throw error
+    }
+    if(result2 === null){
+      console.log("Nilai gagal di insert")
+      throw error
+    }
+
+    return result2
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const findOneNilaibyMahasiswa= async (NIM) => {
   try {
     const nilai = await Nilai.findAll({
