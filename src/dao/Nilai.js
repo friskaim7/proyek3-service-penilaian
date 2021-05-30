@@ -33,15 +33,15 @@ export const insertOneNilai = async (id_nilai,id_kategori,nilai,nim) => {
   }
 }
 
-export const importNilai = async (dataKategori, dataNilai) => {
+export const importNilai = async (idMataKuliah,dataKategori, dataNilai) => {
   try {
     var dataKategori = dataKategori
     var dataNilai = dataNilai
 
-    // dataKategori.forEach(element => {
-    //   await Kategori_Nilai.create()
-    // });
-    
+    await Kategori_Nilai.destroy({
+      where: { id_mata_kuliah: idMataKuliah}
+    })
+
     const result = await Kategori_Nilai.bulkCreate(dataKategori)
     const result2 = await Nilai.bulkCreate(dataNilai)
 
