@@ -6,8 +6,8 @@ export const postNewNilai = async (req, res, next) => {
     const {
       id_nilai,
 	  id_kategori,
-	  NIM,
-	  nilai
+	  nilai,
+    nim
     } = req.body
     const error = validationResult(req)
 
@@ -16,7 +16,7 @@ export const postNewNilai = async (req, res, next) => {
       throw error
     }
 
-    const nilaiInsert = await NilaiDAO.insertOneNilai(id_nilai,id_kategori, NIM, nilai)
+    const nilaiInsert = await NilaiDAO.insertOneNilai(id_nilai,id_kategori, nilai,nim)
 
     if (typeof nilaiInsert === 'undefined') {
       error.status = 500

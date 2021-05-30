@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.addColumn(
       'Nilai', 
       'nim', {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(15),
         allowNull: false,
         reference: {
           model: 'Mahasiswa',
