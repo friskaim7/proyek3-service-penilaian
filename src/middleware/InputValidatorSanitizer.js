@@ -62,6 +62,11 @@ export const createUser = [
 export const postNewNilai=[
   body('nilai', 'Nilai Wajib diisi').exists()
 ]
+export const postNewKategoriNilai=[
+  body('id_kategori', 'id kategori Wajib diisi').exists(),
+  body('bobot_nilai', 'bobot nilai Wajib diisi').exists(),
+  body('id_matakuliah', 'id mata kuliah Wajib diisi').exists(),
+]
 
 export const updateNilaiMahasiswa = [
   body('nilai', 'Nilai wajib diisi').exists()
