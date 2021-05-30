@@ -4,6 +4,7 @@ import { validationResult } from 'express-validator/check'
 export const postNewNilai = async (req, res, next) => {
   try {
     const {
+      id_nilai,
 	  id_kategori,
 	  NIM,
 	  nilai
@@ -15,7 +16,7 @@ export const postNewNilai = async (req, res, next) => {
       throw error
     }
 
-    const nilaiInsert = await NilaiDAO.insertOneNilai(id_kategori, NIM, nilai)
+    const nilaiInsert = await NilaiDAO.insertOneNilai(id_nilai,id_kategori, NIM, nilai)
 
     if (typeof nilaiInsert === 'undefined') {
       error.status = 500

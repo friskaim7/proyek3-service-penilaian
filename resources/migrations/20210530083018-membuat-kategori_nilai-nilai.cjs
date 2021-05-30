@@ -43,7 +43,7 @@ module.exports = {
       },
       nilai: {
         type: Sequelize.INTEGER
-      }
+      },
     });
   },
 
