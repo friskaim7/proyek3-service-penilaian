@@ -5,6 +5,7 @@ import * as ValidatorSanitizer from '../middleware/InputValidatorSanitizer'
 const router = express.Router()
 
 router.get('/get-one/:NIP', DosenController.getDosenByNIP)
+router.get('/get-perkuliahan-dosen/:nip', DosenController.getPerkuliahanDosen)
 router.get('/all-dosen', DosenController.getAllDosen)
 router.get('', DosenController.getDosenByJabatan)
 router.post('/new-dosen', ValidatorSanitizer.postNewDosen, DosenController.postNewDosen)

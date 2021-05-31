@@ -39,12 +39,12 @@ export const importNilai = async (idMataKuliah,dataKategori, dataNilai) => {
     var dataNilai = dataNilai
     const idmatakuliah = idMataKuliah
 
-    const kk = await Kategori_Nilai.findOne({
+    const kk = await Kategori_Nilai.findAll({
       where: { id_mata_kuliah: idmatakuliah}
     })
     if(kk !== null){
       await Kategori_Nilai.destroy({
-          where: { id_mata_kuliah: idmatakuliah}
+          where: { id_mata_kuliah: idmatakuliah }
         })
     }
     const result = await Kategori_Nilai.bulkCreate(dataKategori)

@@ -107,3 +107,23 @@ export const deleteDosenByNIP = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getPerkuliahanDosen = async (req, res, next) => {
+  try {
+    const nip = req.params.nip
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+      error.status = 400
+      throw error
+    }
+    const result = await DosenDAO.getPerkuliahanDosen(nip)
+    res.status(200).json({
+      message: 'Get Perkuliahan Dosen sukses',
+      data: {
+        result
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}

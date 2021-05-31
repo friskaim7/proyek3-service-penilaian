@@ -40,8 +40,8 @@ module.exports = {
           model:'Kategori_Nilai',
           key:'id_kategori',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       nilai: {
         type: Sequelize.INTEGER

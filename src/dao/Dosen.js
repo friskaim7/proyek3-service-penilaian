@@ -1,4 +1,6 @@
 import Dosen from '../models/Dosen.js'
+import Perkuliahan from '../models/Perkuliahan.js'
+import Pengajar from '../models/Pengajar.js'
 import sequelize from '../db.js'
 
 /*
@@ -80,5 +82,21 @@ export const destroyDosenByNip = async (NIP) => {
     return dosen
   } catch (error) {
     return Promise.reject(new Error('Delete dosen by NIP gagal'))
+  }
+}
+
+export const getPerkuliahanDosen = async (nip) => {
+  try {
+    const result = await Dosen.findOne({
+      where: {nip: nip},
+      include: Perkuliahan
+    })
+    // const result = await Pengajar.findOne({
+    //     where: {nip: nip},
+    //     include: Perkuliahan
+    //   })
+    return result
+  } catch (error) {
+    return Promise.reject(new Error('Get Perkuliahan Dosen gagal'))
   }
 }
