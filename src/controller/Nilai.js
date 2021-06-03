@@ -90,7 +90,7 @@ export const deleteNilaibyMahasiswa = async (req, res, next) => {
 
 export const getAllNilai = async (req, res, next) => {
   try {
-    const nilai = await NilaiDAO.findAllNilai()
+    const nilai = await NilaiDAO.getAllNilai()
     res.status(200).json({
       message: 'get all nilai success',
       data: {
@@ -128,7 +128,7 @@ export const updateNilaibyMahasiswa = async (req, res, next) => {
 export const getOneNilaibyMahasiswa = async (req, res, next) => {
   try {
     const { NIM } = req.params
-    const nilai = await NilaiDAO.findOneNilaibyMahasiswa(NIM)
+    const nilai = await NilaiDAO.getOneNilaibyMahasiswa(NIM)
     res.status(200).json({
       message: 'get one Mahasiswa by NIM success',
       data: {

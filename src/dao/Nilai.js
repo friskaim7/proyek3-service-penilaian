@@ -65,7 +65,7 @@ export const importNilai = async (idMataKuliah,dataKategori, dataNilai) => {
   }
 }
 
-export const findOneNilaibyMahasiswa= async (NIM) => {
+export const getOneNilaibyMahasiswa= async (NIM) => {
   try {
     const nilai = await Nilai.findAll({
       where: {
@@ -74,16 +74,16 @@ export const findOneNilaibyMahasiswa= async (NIM) => {
     })
     return nilai[0]
   } catch (error) {
-    return Promise.reject(new Error('Find nilai by Mahasiswa gagal'))
+    return Promise.reject(new Error('Get nilai by Mahasiswa gagal'))
   }
 }
 
-export const findAllNilai = async () => {
+export const getAllNilai = async () => {
   try {
     const nilai = await Nilai.findAll()
     return nilai
   } catch (error) {
-    return Promise.reject(new Error('Find all nilai gagal'))
+    return Promise.reject(new Error('Get all nilai gagal'))
   }
 }
 
