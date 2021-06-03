@@ -1,5 +1,7 @@
 import Dosen from '../models/Dosen.js'
 import Perkuliahan from '../models/Perkuliahan.js'
+import Kelas from '../models/Kelas.js'
+import Mata_Kuliah from '../models/Mata_Kuliah.js'
 import Pengajar from '../models/Pengajar.js'
 import sequelize from '../db.js'
 
@@ -98,5 +100,37 @@ export const getPerkuliahanDosen = async (nip) => {
     return result
   } catch (error) {
     return Promise.reject(new Error('Get Perkuliahan Dosen gagal'))
+  }
+}
+
+export const getKelasDosen = async (nip) => {
+  try {
+    const result = await Dosen.findOne({
+      where: {nip: nip},
+      include: Kelas
+    })
+    // const result = await Pengajar.findOne({
+    //     where: {nip: nip},
+    //     include: Kelas
+    //   })
+    return result
+  } catch (error) {
+    return Promise.reject(new Error('Get Kelas Dosen gagal'))
+  }
+}
+
+export const getMataKuliahDosen = async (nip) => {
+  try {
+    const result = await Dosen.findOne({
+      where: {nip: nip},
+      include: Mata_Kuliah
+    })
+    // const result = await Pengajar.findOne({
+    //     where: {nip: nip},
+    //     include: Mata_Kuliah
+    //   })
+    return result
+  } catch (error) {
+    return Promise.reject(new Error('Get Mata Kuliah Dosen gagal'))
   }
 }
