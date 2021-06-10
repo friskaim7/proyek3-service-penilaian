@@ -10,11 +10,11 @@ module.exports = {
       nama_kategori: {
         type: Sequelize.STRING,
       },
-      id_mata_kuliah: {
-        type: Sequelize.INTEGER,
+      id: {
+        type: Sequelize.STRING,
         references:{
           model:'Mata_Kuliah',
-          key:'id_mata_kuliah',
+          key:'id',
         },
         allowNull: false,
       },
