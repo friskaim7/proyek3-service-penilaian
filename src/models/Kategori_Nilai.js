@@ -9,18 +9,19 @@ const Kategori_Nilai = db.define('Kategori_Nilai', {
   nama_kategori: {
     type: Sequelize.STRING,
   },
-  id_mata_kuliah: {
+  id_perkuliahan: {
     type: Sequelize.INTEGER,
-    references:{
-      model:'Mata_Kuliah',
-      key:'id_mata_kuliah',
-    },
     allowNull: false,
   },
-  id_kategori: {
+  nip: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey:true
+    primaryKey:true,
+    autoIncrement: true
   },
   bobot_nilai: {
     type: Sequelize.STRING,

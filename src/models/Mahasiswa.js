@@ -4,7 +4,7 @@ import db from '../db'
 
 const Mahasiswa = db.define('Mahasiswa', {
   nim: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true
   },

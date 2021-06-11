@@ -10,18 +10,27 @@ module.exports = {
       nama_kategori: {
         type: Sequelize.STRING,
       },
-      id_mata_kuliah: {
-        type: Sequelize.INTEGER,
+      id_perkuliahan: {
+        type: Sequelize.STRING(12),
         references:{
-          model:'Mata_Kuliah',
-          key:'id_mata_kuliah',
+          model:'Perkuliahan',
+          key:'id',
         },
         allowNull: false,
       },
-      id_kategori: {
+      nip: {
+        type: Sequelize.STRING,
+        references:{
+          model:'Dosen',
+          key:'nip',
+        },
+        allowNull: false,
+      },
+      id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey:true
+        primaryKey:true,
+        autoIncrement: true
       },
       bobot_nilai: {
         type: Sequelize.STRING,
@@ -29,19 +38,29 @@ module.exports = {
       }
     });
     await queryInterface.createTable('Nilai', {
-      id_nilai: {
+      id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
       },
       id_kategori: {
         type: Sequelize.INTEGER,
         references:{
           model:'Kategori_Nilai',
-          key:'id_kategori',
+          key:'id',
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'
+      },
+      nim: {
+        type: Sequelize.STRING,
+        references:{
+          model:'Mahasiswa',
+          key:'nim',
+        },
+        onUpdate: 'cascade',
+        onDelete: 'set null'
       },
       nilai: {
         type: Sequelize.INTEGER

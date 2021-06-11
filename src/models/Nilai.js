@@ -3,7 +3,7 @@ import Sequelize from 'sequelize'
 import db from '../db'
 
 const Nilai = db.define('Nilai', {
-  id_nilai: {
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
@@ -11,20 +11,20 @@ const Nilai = db.define('Nilai', {
   },
   id_kategori: {
     type: Sequelize.INTEGER,
-    references:{
-      model:'Kategori_Nilai',
-      key:'id_kategori',
-    }
+    // references:{
+    //   model:'Kategori_Nilai',
+    //   key:'id_kategori',
+    // }
   },
   nilai: {
     type: Sequelize.INTEGER
   },
   nim: {
-    type: Sequelize.STRING(15),
-    references:{
-      model:'Mahasiswa',
-      key:'nim',
-    }
+    type: Sequelize.STRING,
+    // references:{
+    //   model:'Mahasiswa',
+    //   key:'nim',
+    // }
   }
 }, {
   timestamps: false
