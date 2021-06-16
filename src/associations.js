@@ -6,6 +6,9 @@ const perkuliahan = require('./models/Perkuliahan')
 const dosen = require('./models/Dosen')
 const jabatan = require('./models/Jabatan')
 const jurusan = require('./models/Jurusan')
+const nilai = require('./models/Nilai)
+const kategoriNilai = require('./models/Kategori_Nilai)
+
 
 const setAssociations = () => {
   programStudi.hasMany(mataKuliah, {
@@ -35,6 +38,9 @@ const setAssociations = () => {
   dosen.hasMany(jurusan, {
     foreignKey: 'nip'
   })
+  dosen.hasMany(kategoriNilai, {
+    foreignKey: 'nip'
+  })  
   jabatan.hasOne(dosen, {
     foreignKey: 'id_jabatan'
   })
@@ -47,7 +53,7 @@ const setAssociations = () => {
   jurusan.hasMany(programStudi, {
     foreignKey: 'kode_jurusan'
   })
-  mataKuliah.hasMany(kategoriNilai, {
+  perkuliahan.hasMany(kategoriNilai, {
     foreignKey: 'id_mata_kuliah'
   })
   mahasiswa.hasMany(nilai, {
