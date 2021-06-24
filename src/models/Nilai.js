@@ -3,6 +3,11 @@ import Sequelize from 'sequelize'
 import db from '../db'
 
 const Nilai = db.define('Nilai', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   kode_kategori: {
     type: Sequelize.STRING,
     allowNull: false,

@@ -40,7 +40,7 @@ export const importNilai = async (req, res, next) => {
 
     const dataKategori = req.body.dataKategori
     const dataNilai = req.body.dataNilai
-    const idMataKuliah = req.body.idMataKuliah
+    const id_perkuliahan = req.params.id_perkuliahan
 
     const error = validationResult(req)
     if (!error.isEmpty()) {
@@ -48,7 +48,7 @@ export const importNilai = async (req, res, next) => {
       throw error
     }
 
-    const importNilai = await NilaiDAO.importNilai(idMataKuliah,dataKategori, dataNilai)
+    const importNilai = await NilaiDAO.importNilai(id_perkuliahan,dataKategori, dataNilai)
 
     if (typeof importNilai === 'undefined') {
       error.status = 500
