@@ -3,29 +3,29 @@ import Sequelize from 'sequelize'
 import db from '../db'
 
 const Nilai = db.define('Nilai', {
-  id: {
+  kode_kategori: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    references:{
+      model:'Kategori_Nilai',
+      key:'kode_kategori',
+    },
+    onUpdate: 'cascade',
+    onDelete: 'cascade'
+  },
+  id_studi: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  id_kategori: {
-    type: Sequelize.INTEGER,
-    // references:{
-    //   model:'Kategori_Nilai',
-    //   key:'id_kategori',
-    // }
+    references:{
+      model:'Studi',
+      key:'id',
+    },
+    onUpdate: 'cascade',
+    onDelete: 'set null'
   },
   nilai: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DOUBLE
   },
-  nim: {
-    type: Sequelize.STRING,
-    // references:{
-    //   model:'Mahasiswa',
-    //   key:'nim',
-    // }
-  }
 }, {
   timestamps: false
 })
