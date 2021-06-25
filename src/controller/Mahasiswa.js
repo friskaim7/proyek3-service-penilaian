@@ -1,5 +1,6 @@
 import * as MahasiswaDAO from '../dao/Mahasiswa'
-import { validationResult } from 'express-validator/check'
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 
 export const postNewMahasiswa = async (req, res, next) => {
   try {

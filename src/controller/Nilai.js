@@ -1,5 +1,6 @@
 import * as NilaiDAO from '../dao/Nilai'
-import { validationResult } from 'express-validator/check'
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 
 export const postNewNilai = async (req, res, next) => {
   try {

@@ -1,5 +1,6 @@
 import * as DosenDAO from '../dao/Dosen'
-import { validationResult } from 'express-validator/check'
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 
 /*
   Catatan:

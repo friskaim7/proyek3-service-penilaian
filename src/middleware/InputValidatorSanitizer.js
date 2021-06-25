@@ -1,4 +1,5 @@
-import { body, param } from 'express-validator'
+import expressValidator from 'express-validator';
+const { body, param } = expressValidator;
 import * as DosenDAO from '../dao/Dosen'
 import * as MahasiswaDAO from '../dao/Mahasiswa'
 
