@@ -12,6 +12,14 @@ const Perkuliahan = db.define('Perkuliahan', {
   tahun_akademik: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  id_mata_kuliah: {
+    type: Sequelize.STRING(12),
+    allowNull: true
+  },
+  kode_kelas: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 })
 

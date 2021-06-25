@@ -3,7 +3,7 @@ import * as PerkuliahaDAO from '../dao/Perkuliahan'
 import * as KelasDAO from '../dao/Kelas'
 import { validationResult } from 'express-validator/check'
 
-export const getKelasAjarByDosen = async (req, res) => {
+export const getKelasAjarByDosen = async (req, res, next) => {
     try {
         const nip = req.params.nip
         const pengajar = await PengajarDAO.findPengajarByNIP(nip)
@@ -20,21 +20,20 @@ export const getKelasAjarByDosen = async (req, res) => {
             var kelas = await KelasDAO.findKelasByKodeKelas(perkuliahan.kode_kelas)
             listKelas.push(kelas)
         }
-        for(i=0; i < listKelas.length; i++){
-            for (j=i+1; j <listKelas.length; j++){
-                if (listKelas[i].kode_kelas == listKelas[j].kode_kelas){
-                    listKelas.splice(j, 1)
-                }
-            }
-        }
+        const seen = new Set();
+        const uniqueClass = listKelas.filter(data => {
+            const duplicate = seen.has(data.kode_kelas);
+            seen.add(data.kode_kelas);
+            return !duplicate;
+        });
         res.status(200).json({
             message: 'get matkul by dosen sukses',
             data: {
-                listKelas
+                uniqueClass
             }
         })
     }
     catch (error) {
-        res.status(error.status).json({ error })
+        next(error)
     }
 }

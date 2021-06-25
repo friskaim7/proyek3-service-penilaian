@@ -6,20 +6,18 @@ const Kelas = db.define('Kelas', {
   kode_kelas: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+    primaryKey: true
   },
   kode_program_studi: {
-    type: Sequelize.STRING(15),
-    allowNull: false,
-    unique: true
+    type: Sequelize.STRING,
+    allowNull: false
   },
   nip: {
-    type: Sequelize.STRING(30),
+    type: Sequelize.STRING,
     allowNull: false
   },
   tahun: {
-    type: Sequelize.STRING(9),
+    type: Sequelize.INTEGER,
     allowNull: false
   }
 })

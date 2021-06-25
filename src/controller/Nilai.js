@@ -67,6 +67,35 @@ export const importNilai = async (req, res, next) => {
   }
 }
 
+export const getNilaiByPerkuliahan = async (req, res, next) => {
+  try {
+    // const id_perkuliahan = req.params.id_perkuliahan
+
+    // const error = validationResult(req)
+    // if (!error.isEmpty()) {
+    //   error.status = 400
+    //   throw error
+    // }
+
+    // const nilaiByPerkuliahan = await NilaiDAO.importNilai(id_perkuliahan,dataKategori, dataNilai)
+
+    // if (typeof importNilai === 'undefined') {
+    //   error.status = 500
+    //   error.message = 'Import Nilai gagal'
+    //   throw error
+    // }
+
+    // res.status(200).json({
+    //   message: 'Import nilai sukses',
+    //   data: {
+    //     importNilai
+    //   }
+    // })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const deleteNilaibyMahasiswa = async (req, res, next) => {
   try {
     const nilaiId = req.params.id_nilai
@@ -139,3 +168,5 @@ export const getOneNilaibyMahasiswa = async (req, res, next) => {
     next(error)
   }
 }
+
+

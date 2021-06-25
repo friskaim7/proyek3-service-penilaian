@@ -6,6 +6,10 @@ const Jurusan = db.define('Jurusan', {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true
+  },
+  nip: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 })
 

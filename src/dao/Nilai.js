@@ -65,6 +65,16 @@ export const importNilai = async (idperkuliahan,dataKategori, dataNilai) => {
   }
 }
 
+export const getNilaiByPerkuliahan = async (idperkuliahan) => {
+  try {
+
+    const idPerkuliahan = idperkuliahan
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getOneNilaibyMahasiswa= async (NIM) => {
   try {
     const nilai = await Nilai.findAll({
@@ -118,3 +128,5 @@ export const destroyNilaiByMahasiswa = async (NIM) => {
     return Promise.reject(new Error('Delete Nilai by Mahasiswa gagal'))
   }
 }
+
+
