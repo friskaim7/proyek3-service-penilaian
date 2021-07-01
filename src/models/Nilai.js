@@ -18,12 +18,12 @@ const Nilai = db.define('Nilai', {
     onUpdate: 'cascade',
     onDelete: 'cascade'
   },
-  id_studi: {
-    type: Sequelize.INTEGER,
+  nim: {
+    type: Sequelize.STRING,
     allowNull: false,
     references:{
-      model:'Studi',
-      key:'id',
+      model:'Mahasiswa',
+      key:'nim',
     },
     onUpdate: 'cascade',
     onDelete: 'set null'
