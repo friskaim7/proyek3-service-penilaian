@@ -115,3 +115,16 @@ export const deleteMahasiswabyId = async (mahasiswaId) => {
     console.log(error)
   }
 }
+
+export const findMahasiswaCriteriaNIM = async (listNIM) => {
+  try {
+    const mahasiswa = await Mahasiswa.findAll({
+      where: {
+        nim: listNIM
+      }
+    })
+    return mahasiswa
+  } catch (error) {
+    console.error(error)
+  }
+}

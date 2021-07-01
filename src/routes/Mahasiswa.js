@@ -12,4 +12,6 @@ router.get('/getOne/:NIM', MahasiswaController.getOneMahasiswaByNIM)
 router.get('/searchByName/:nama', MahasiswaController.searchMahasiswaByName)
 router.get('/searchByNIM/:NIM', MahasiswaController.searchMahasiswaByNIM)
 
+router.get('/perkuliahan/:id_perkuliahan', MahasiswaController.getMahasiswaByPerkuliahan)
+
 export default router

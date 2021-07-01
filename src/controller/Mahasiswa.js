@@ -1,5 +1,7 @@
 import * as MahasiswaDAO from '../dao/Mahasiswa'
+import * as StudiDAO from '../dao/Studi'
 import expressValidator from 'express-validator/check'
+import Mahasiswa from '../models/Mahasiswa'
 const { validationResult } = expressValidator
 
 export const postNewMahasiswa = async (req, res, next) => {
@@ -149,6 +151,50 @@ export const searchMahasiswaByNIM = async (req, res, next) => {
         mahasiswa
       }
     })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getMahasiswaByPerkuliahan = async (req, res, next) =>{
+  try{
+    const idPerkuliahan = req.params.id_perkuliahan
+
+    const studi = await StudiDAO.findStudiByIdPerkuliahan(idPerkuliahan);
+    var listIdMahasiswa = []
+    var i
+    var j
+    for(i = 0; i<studi.length; i++){
+      var idMahasiswa = studi[i].id_mahasiswa
+      listIdMahasiswa.push(idMahasiswa)
+    }
+    const mahasiswaPerkuliahan = await MahasiswaDAO.findMahasiswaCriteriaNIM(listIdMahasiswa)
+        // const pengajar = await PengajarDAO.findPengajarByNIP(nip)
+        // var i
+        // var j
+        // var listIdPerkuliahan = []
+        // var listKelas = []
+        // for (i = 0; i < pengajar.length; i++){
+        //     var idPerkuliahan = pengajar[i].id_perkuliahan
+        //     listIdPerkuliahan.push(idPerkuliahan)
+        // }
+        // for (i = 0; i < listIdPerkuliahan.length; i++){
+        //     var perkuliahan = await PerkuliahaDAO.findPerkuliahanById(listIdPerkuliahan[i])
+        //     var kelas = await KelasDAO.findKelasByKodeKelas(perkuliahan.kode_kelas)
+        //     listKelas.push(kelas)
+        // }
+        // const seen = new Set();
+        // const uniqueClass = listKelas.filter(data => {
+        //     const duplicate = seen.has(data.kode_kelas);
+        //     seen.add(data.kode_kelas);
+        //     return !duplicate;
+        // });
+        res.status(200).json({
+            message: 'get matkul by dosen sukses',
+            data: {
+                mahasiswaPerkuliahan
+            }
+        })
   } catch (error) {
     next(error)
   }
