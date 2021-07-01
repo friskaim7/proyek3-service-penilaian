@@ -24,7 +24,7 @@ app.use('/dosen', dosenRouter)
 app.use('/mahasiswa', mahasiswaRouter)
 app.use('/user', userRouter)
 app.use('/nilai', nilaiRouter)
-app.use('/kategori-nilai', kategoriNilaiRouter
+app.use('/kategori-nilai', kategoriNilaiRouter)
 app.use('/nilai-akhir', nilaiAkhirRouter)
 
 
