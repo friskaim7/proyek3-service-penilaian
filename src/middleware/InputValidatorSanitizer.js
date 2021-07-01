@@ -3,6 +3,7 @@ const { body, param } = expressValidator;
 import * as DosenDAO from '../dao/Dosen'
 import * as MahasiswaDAO from '../dao/Mahasiswa'
 
+
 // CATATAN : File ini berisi middleware untuk memvalidasi dan sanitasi inputan yang dikirim oleh user
 
 /* Validator dan Sanitizer untuk Dosen */
@@ -63,6 +64,11 @@ export const createUser = [
 export const postNewNilai=[
   body('nilai', 'Nilai Wajib diisi').exists()
 ]
+
+export const postNewNilaiAkhir=[
+  body('nilai_akhir', 'Nilai Akhir Wajib diisi').exists()
+]
+
 export const postNewKategoriNilai=[
   body('id_kategori', 'id kategori Wajib diisi').exists(),
   body('bobot_nilai', 'bobot nilai Wajib diisi').exists(),
@@ -71,6 +77,10 @@ export const postNewKategoriNilai=[
 
 export const updateNilaiMahasiswa = [
   body('nilai', 'Nilai wajib diisi').exists()
+]
+
+export const updateNilaiAkhirMahasiswa = [
+  body('nilai_akhir', 'Nilai Akhir wajib diisi').exists()
 ]
 
 export const deleteDosenByNIP = [

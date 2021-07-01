@@ -69,22 +69,22 @@ export const getAllNilaiAkhir = async (req, res, next) => {
   }
 }
 
-export const updateNilaibyMatkul = async (req, res, next) => {
+export const updateNilaiAkhirbyMatkul = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const updateNilai = await NilaiDAO.updateNilaibyMahasiswa(id_mahasiswa, req.body.nilai)
-    if (updateNilai === 1) {
-      const nilai = await NilaiDAO.findNilaibyMahasiswa(id_mahasiswa)
+    const { id_studi } = req.params
+    const updateNilaiAkhir = await NilaiAkhirDAO.updateNilaiAkhirbyMatkul(id_studi, req.body.nilai_akhir)
+    if (updateNilaiAkhir === 1) {
+      const nilai_akhir = await NilaiAkhirDAO.getOneNilaiAkhirbyMatkul(id_studi)
       res.status(200).json({
-        message: 'Update Nilai Mahasiswa berhasil',
+        message: 'Update Nilai Akhir Mahasiswa berhasil',
         data: {
-          nilai
+          nilai_akhir
         }
       })
     } else {
-      const error = new Error('Update Nilai Mahasiswa gagal')
+      const error = new Error('Update Nilai Akhir Mahasiswa gagal')
       error.statusCode = 500
-      error.cause = 'Update Nilai Mahasiswa gagal'
+      error.cause = 'Update Nilai Akhir Mahasiswa gagal'
       throw error
     }
   } catch (error) {
@@ -92,14 +92,14 @@ export const updateNilaibyMatkul = async (req, res, next) => {
   }
 }
 
-export const getOneNilaibyMahasiswa = async (req, res, next) => {
+export const getOneNilaiAkhirbyMatkul = async (req, res, next) => {
   try {
-    const { NIM } = req.params
-    const nilai = await NilaiDAO.getOneNilaibyMahasiswa(NIM)
+    const { id_studi } = req.params
+    const nilai_akhir = await NilaiAkhirDAO.getOneNilaiAkhirbyMatkul(id_studi)
     res.status(200).json({
-      message: 'get one Mahasiswa by NIM success',
+      message: 'get one Nilai Akhir by Markul success',
       data: {
-        mahasiswa
+        id_studi
       }
     })
   } catch (error) {

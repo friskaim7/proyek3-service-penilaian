@@ -137,7 +137,7 @@ export const updateNilaibyMahasiswa = async (req, res, next) => {
     const { id_mahasiswa } = req.params
     const updateNilai = await NilaiDAO.updateNilaibyMahasiswa(id_mahasiswa, req.body.nilai)
     if (updateNilai === 1) {
-      const nilai = await NilaiDAO.findNilaibyMahasiswa(id_mahasiswa)
+      const nilai = await NilaiDAO.getOneNilaibyMahasiswa(id_mahasiswa)
       res.status(200).json({
         message: 'Update Nilai Mahasiswa berhasil',
         data: {
