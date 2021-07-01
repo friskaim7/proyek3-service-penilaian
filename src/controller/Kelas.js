@@ -1,7 +1,8 @@
 import * as PengajarDAO from '../dao/Pengajar'
 import * as PerkuliahaDAO from '../dao/Perkuliahan'
 import * as KelasDAO from '../dao/Kelas'
-import { validationResult } from 'express-validator/check'
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 
 export const getKelasAjarByDosen = async (req, res, next) => {
     try {

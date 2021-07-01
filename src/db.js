@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
-import { createNamespace } from 'cls-hooked'
+import clsHooked from 'cls-hooked'
+const { createNamespace } = clsHooked
 
 export const namespace = createNamespace('db')
 Sequelize.useCLS(namespace)

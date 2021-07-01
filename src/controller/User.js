@@ -1,8 +1,10 @@
 import { insertOneDosen } from '../dao/Dosen'
 import { insertOneMahasiswa } from '../dao/Mahasiswa'
-import { validationResult } from 'express-validator/check'
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 import { getAdminClient, adminAuth } from '../config/keycloak-admin'
-import { uuid } from 'uuidv4'
+import uuIdv4 from 'uuidv4';
+const { uuid } = uuIdv4;
 
 export const createUser = async (req, res, next) => {
   try {
