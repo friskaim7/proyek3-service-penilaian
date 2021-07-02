@@ -1,7 +1,38 @@
 import * as NilaiAkhirDAO from '../dao/Nilai_Akhir'
+import * as StudiDAO from '../dao/Studi'
+
 import expressValidator from 'express-validator/check'
 const { validationResult } = expressValidator
 
+export const updateNilaiAkhir = async (req, res, next) => {
+  try {
+    var idPerkuliahan = req.params.id_perkuliahan
+    const dataNilaiAkhir = req.body.dataNilaiAkhir
+    var listNilaiAkhir = []
+    
+    for(var i = 0; i<dataNilaiAkhir.length; i++){
+      var nim = dataNilaiAkhir[i].nim
+      const nilaiAkhir = {nilai_akhir: dataNilaiAkhir[i].nilai_akhir}
+      const recordNilaiAkhir = await StudiDAO.updateNilaiAkhirByNimPerkuliahan(nim, idPerkuliahan, nilaiAkhir)
+      console.log(recordNilaiAkhir)
+      listNilaiAkhir.push(recordNilaiAkhir)
+    }
+
+    if (listNilaiAkhir === null){
+      console.log('gagal update nilai akhir')
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'update nilai akhir sukses',
+      data: {
+        listNilaiAkhir
+      }
+    })
+  } catch(error) {
+    next(error)
+  }
+}
 export const postNewNilaiAkhir = async (req, res, next) => {
   try {
     const {

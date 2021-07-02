@@ -169,32 +169,12 @@ export const getMahasiswaByPerkuliahan = async (req, res, next) =>{
       listIdMahasiswa.push(idMahasiswa)
     }
     const mahasiswaPerkuliahan = await MahasiswaDAO.findMahasiswaCriteriaNIM(listIdMahasiswa)
-        // const pengajar = await PengajarDAO.findPengajarByNIP(nip)
-        // var i
-        // var j
-        // var listIdPerkuliahan = []
-        // var listKelas = []
-        // for (i = 0; i < pengajar.length; i++){
-        //     var idPerkuliahan = pengajar[i].id_perkuliahan
-        //     listIdPerkuliahan.push(idPerkuliahan)
-        // }
-        // for (i = 0; i < listIdPerkuliahan.length; i++){
-        //     var perkuliahan = await PerkuliahaDAO.findPerkuliahanById(listIdPerkuliahan[i])
-        //     var kelas = await KelasDAO.findKelasByKodeKelas(perkuliahan.kode_kelas)
-        //     listKelas.push(kelas)
-        // }
-        // const seen = new Set();
-        // const uniqueClass = listKelas.filter(data => {
-        //     const duplicate = seen.has(data.kode_kelas);
-        //     seen.add(data.kode_kelas);
-        //     return !duplicate;
-        // });
-        res.status(200).json({
-            message: 'get matkul by dosen sukses',
-            data: {
-                mahasiswaPerkuliahan
-            }
-        })
+    res.status(200).json({
+      message: 'get matkul by dosen sukses',
+        data: {
+          mahasiswaPerkuliahan
+        }
+    })
   } catch (error) {
     next(error)
   }

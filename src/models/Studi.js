@@ -15,6 +15,10 @@ const Studi = db.define('Studi', {
   id_mahasiswa: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  nilai_akhir: {
+    type: Sequelize.DOUBLE,
+    allowNull: true
   }
 })
 

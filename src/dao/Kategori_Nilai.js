@@ -24,3 +24,20 @@ export const insertOneKategoriNilai = async (id_kategori,parent,nama_kategori,bo
     console.log(error)
   }
 }
+
+export const findKategoriByPerkuliahan = async(idPerkuliahan) => {
+  try{
+    const kategoriNilai = await Kategori_Nilai.findAll({
+      where: {
+        id_perkuliahan: idPerkuliahan
+      }
+    })
+    if(kategoriNilai === null){
+      console.log("Kategori tidak ditemukan")
+      throw error
+    }
+    return kategoriNilai
+  } catch(error){
+    console.log(error)
+  }
+}
