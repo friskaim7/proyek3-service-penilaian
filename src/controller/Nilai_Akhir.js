@@ -2,6 +2,7 @@ import * as NilaiAkhirDAO from '../dao/Nilai_Akhir'
 import * as StudiDAO from '../dao/Studi'
 
 import expressValidator from 'express-validator/check'
+import Studi from '../models/Studi'
 const { validationResult } = expressValidator
 
 export const updateNilaiAkhir = async (req, res, next) => {
@@ -24,6 +25,32 @@ export const updateNilaiAkhir = async (req, res, next) => {
 
     res.status(200).json({
       message: 'update nilai akhir sukses',
+      data: {
+        listNilaiAkhir
+      }
+    })
+  } catch(error) {
+    next(error)
+  }
+}
+export const getNilaiAkhirByPerkuliahanDosen = async (req, res, next) => {
+  try {
+    var idPerkuliahan = req.params.id_perkuliahan
+    const dataNilaiAkhir = await StudiDAO.findStudiByIdPerkuliahan(idPerkuliahan)
+
+    var listNilaiAkhir = []
+    for(var i = 0; i<dataNilaiAkhir.length; i++){
+      const result = {nim: dataNilaiAkhir[i].id_mahasiswa, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas, nilai_akhir: dataNilaiAkhir[i].nilai_akhir}
+      listNilaiAkhir.push(result)
+    }
+    
+    if (listNilaiAkhir === null) {
+      console.log('Get nilai akhir by perkuliahan gagal')
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'Get nilai akhir by perkuliahan sukses',
       data: {
         listNilaiAkhir
       }

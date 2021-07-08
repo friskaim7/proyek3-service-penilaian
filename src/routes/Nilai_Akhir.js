@@ -13,4 +13,5 @@ router.get('/One-nilaiAkhirbyMatkul/:id_studi', NilaiAkhirController.getOneNilai
 router.put('/update-nilai-akhir/:nilai_akhir',ValidatorSanitizer.updateNilaiAkhirMahasiswa, NilaiAkhirController.updateNilaiAkhirMahasiswa)
 */
 
+router.get('/perkuliahan-dosen/:id_perkuliahan', NilaiAkhirController.getNilaiAkhirByPerkuliahanDosen)
 export default router

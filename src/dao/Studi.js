@@ -6,7 +6,10 @@ export const findStudiByIdPerkuliahan = async (idPerkuliahan) => {
       const studi = await Studi.findAll({
         where: {
           id_perkuliahan: idPerkuliahan
-        }
+        },
+        order: [
+          ['id_mahasiswa', 'ASC']
+      ],
       })
       return studi
     } catch (error) {
