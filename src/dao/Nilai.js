@@ -65,13 +65,17 @@ export const importNilai = async (idperkuliahan,dataKategori, dataNilai) => {
   }
 }
 
-export const getNilaiByPerkuliahan = async (idperkuliahan) => {
+export const getNilaiByListKategoriPerkuliahan = async (kategoriPerkuliahan) => {
   try {
-
-    const idPerkuliahan = idperkuliahan
-
+    var listKategori = kategoriPerkuliahan
+    const allNilai = await Nilai.findAll({
+      where: {
+        kode_kategori: listKategori
+      }
+    })
+    return allNilai
   } catch (error) {
-    console.log(error)
+    return Promise.reject(new Error('Get nilai by kategori perkuliahan gagal'))
   }
 }
 
