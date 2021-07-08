@@ -8,7 +8,9 @@ router.post('/new-nilai',ValidatorSanitizer.postNewNilai, NilaiController.postNe
 router.post('/import-nilai/perkuliahan/:id_perkuliahan', NilaiController.importNilai)
 router.delete('/delete-nilaiByMahasiswa/:id_nilai',NilaiController.deleteNilaibyMahasiswa)
 router.put('/update-nilai/:id_nilai',ValidatorSanitizer.updateNilaiMahasiswa, NilaiController.updateNilaibyMahasiswa)
-router.get('/AllNilai', NilaiController.getAllNilai)
+// router.get('/AllNilai', NilaiController.getAllNilai)
 router.get('/One-nilaibyMahasiswa/:NIM', NilaiController.getOneNilaibyMahasiswa)
+
+router.get('/nilai-by/perkuliahan/:id_perkuliahan', NilaiController.getNilaiByPerkuliahan)
 
 export default router

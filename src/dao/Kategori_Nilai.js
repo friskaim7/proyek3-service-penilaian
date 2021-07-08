@@ -32,12 +32,8 @@ export const findKategoriByPerkuliahan = async(idPerkuliahan) => {
         id_perkuliahan: idPerkuliahan
       }
     })
-    if(kategoriNilai === null){
-      console.log("Kategori tidak ditemukan")
-      throw error
-    }
     return kategoriNilai
   } catch(error){
-    console.log(error)
+    return Promise.reject(new Error('Find Pengajar by NIP gagal'))
   }
 }

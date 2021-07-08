@@ -1,4 +1,5 @@
 import * as NilaiDAO from '../dao/Nilai'
+import * as kategoriNilaiDAO from '../dao/Kategori_Nilai'
 import expressValidator from 'express-validator/check'
 const { validationResult } = expressValidator
 
@@ -69,30 +70,29 @@ export const importNilai = async (req, res, next) => {
 }
 
 export const getNilaiByPerkuliahan = async (req, res, next) => {
-  try {
-    // const id_perkuliahan = req.params.id_perkuliahan
+  try{
+    const idPerkuliahan = req.params.id_perkuliahan
+    const kategori = await kategoriNilaiDAO.findKategoriByPerkuliahan(idPerkuliahan)
+    var listKategori = []
 
-    // const error = validationResult(req)
-    // if (!error.isEmpty()) {
-    //   error.status = 400
-    //   throw error
-    // }
+    for (var i = 0; i < kategori.length; i++){
+      var kode_kategori = kategori[i].kode_kategori
+      listKategori.push(kode_kategori)
+    }
 
-    // const nilaiByPerkuliahan = await NilaiDAO.importNilai(id_perkuliahan,dataKategori, dataNilai)
-
-    // if (typeof importNilai === 'undefined') {
-    //   error.status = 500
-    //   error.message = 'Import Nilai gagal'
-    //   throw error
-    // }
-
-    // res.status(200).json({
-    //   message: 'Import nilai sukses',
-    //   data: {
-    //     importNilai
-    //   }
-    // })
-  } catch (error) {
+    const allNilai = await NilaiDAO.getNilaiByListKategoriPerkuliahan(listKategori)
+    
+    if(allNilai === null){
+      console.log("Get nilai by perkuliahan gagal")
+      throw error
+    }
+    res.status(200).json({
+      message: 'get all nilai success',
+      data: {
+        allNilai
+      }
+    })
+  } catch(error){
     next(error)
   }
 }
