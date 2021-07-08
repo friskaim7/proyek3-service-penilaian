@@ -12,9 +12,8 @@ export const updateNilaiAkhir = async (req, res, next) => {
     
     for(var i = 0; i<dataNilaiAkhir.length; i++){
       var nim = dataNilaiAkhir[i].nim
-      const nilaiAkhir = {nilai_akhir: dataNilaiAkhir[i].nilai_akhir}
+      const nilaiAkhir = {nilai_akhir: dataNilaiAkhir[i].nilai_akhir, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas}
       const recordNilaiAkhir = await StudiDAO.updateNilaiAkhirByNimPerkuliahan(nim, idPerkuliahan, nilaiAkhir)
-      console.log(recordNilaiAkhir)
       listNilaiAkhir.push(recordNilaiAkhir)
     }
 
