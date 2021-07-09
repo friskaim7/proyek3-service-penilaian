@@ -1,5 +1,7 @@
 import * as NilaiAkhirDAO from '../dao/Nilai_Akhir'
 import * as StudiDAO from '../dao/Studi'
+import * as PerkuliahanDAO from '../dao/Perkuliahan'
+import * as MatkulDAO from '../dao/Mata Kuliah'
 
 import expressValidator from 'express-validator/check'
 import Studi from '../models/Studi'
@@ -53,6 +55,43 @@ export const getNilaiAkhirByPerkuliahanDosen = async (req, res, next) => {
       message: 'Get nilai akhir by perkuliahan sukses',
       data: {
         listNilaiAkhir
+      }
+    })
+  } catch(error) {
+    next(error)
+  }
+}
+export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
+  try {
+    var nim = req.params.nim
+    const dataNilai = await StudiDAO.findStudiByNIM(nim)
+    var listResult = []
+    for(var i = 0; i<dataNilai.length; i++){
+      const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
+      const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
+      const result2 = {
+        semester: matkul.semester,
+        nama_matkul: matkul.nama_mata_kuliah,
+        sks_teori: matkul.sks_teori,
+        sks_praktek: matkul.sks_praktek,
+        nilai_akhir: dataNilai[i].nilai_akhir
+      }
+      listResult.push(result2)
+    }
+    //sorting by semester
+    listResult.sort((a,b) => {
+      return a.semester - b.semester
+    })
+
+    if (dataNilai === undefined || listResult === null) {
+      console.log('Get nilai akhir by mahasiswa gagal')
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'Get nilai akhir by mahasiswa sukses',
+      data: {
+        listResult
       }
     })
   } catch(error) {

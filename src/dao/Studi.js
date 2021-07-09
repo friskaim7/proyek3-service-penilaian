@@ -31,3 +31,18 @@ export const updateNilaiAkhirByNimPerkuliahan = async (nim, idPerkuliahan, nilai
         return Promise.reject(new Error('Update Nilai Akhir gagal'))
       }
 }
+export const findStudiByNIM = async (nim) => {
+  try {
+    const studi = await Studi.findAll({
+      where: {
+        id_mahasiswa: nim
+      },
+      order: [
+        ['id_perkuliahan', 'ASC']
+    ],
+    })
+    return studi
+  } catch (error) {
+    return Promise.reject(new Error('Find Studi By NIM gagal'))
+  }
+}
