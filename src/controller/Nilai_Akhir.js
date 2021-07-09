@@ -71,9 +71,11 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
       const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
       const result2 = {
         semester: matkul.semester,
+        kode_matkul: matkul.id,
         nama_matkul: matkul.nama_mata_kuliah,
-        sks_teori: matkul.sks_teori,
-        sks_praktek: matkul.sks_praktek,
+        // sks_teori: matkul.sks_teori,
+        // sks_praktek: matkul.sks_praktek,
+        sks: matkul.sks_teori + matkul.sks_praktek,
         nilai_akhir: dataNilai[i].nilai_akhir
       }
       listResult.push(result2)
