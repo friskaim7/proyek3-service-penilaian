@@ -5,7 +5,7 @@ export const findOneMahasiswaByNIM = async (NIM) => {
   try {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
-        NIM
+        nim: NIM
       }
     })
     return mahasiswa[0]

@@ -2,6 +2,7 @@ import * as NilaiAkhirDAO from '../dao/Nilai_Akhir'
 import * as StudiDAO from '../dao/Studi'
 import * as PerkuliahanDAO from '../dao/Perkuliahan'
 import * as MatkulDAO from '../dao/Mata Kuliah'
+import * as MahasiswaDAO from '../dao/Mahasiswa'
 
 import expressValidator from 'express-validator/check'
 import Studi from '../models/Studi'
@@ -42,7 +43,8 @@ export const getNilaiAkhirByPerkuliahanDosen = async (req, res, next) => {
 
     var listNilaiAkhir = []
     for(var i = 0; i<dataNilaiAkhir.length; i++){
-      const result = {nim: dataNilaiAkhir[i].id_mahasiswa, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas, nilai_akhir: dataNilaiAkhir[i].nilai_akhir}
+      var mhs = await MahasiswaDAO.findOneMahasiswaByNIM(dataNilaiAkhir[i].id_mahasiswa)
+      const result = {nim: dataNilaiAkhir[i].id_mahasiswa, nama: mhs.nama, nilai_ets: dataNilaiAkhir[i].nilai_ets, nilai_eas: dataNilaiAkhir[i].nilai_eas, nilai_akhir: dataNilaiAkhir[i].nilai_akhir}
       listNilaiAkhir.push(result)
     }
     

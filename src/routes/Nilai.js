@@ -11,6 +11,6 @@ router.put('/update-nilai/:id_nilai',ValidatorSanitizer.updateNilaiMahasiswa, Ni
 // router.get('/AllNilai', NilaiController.getAllNilai)
 router.get('/One-nilaibyMahasiswa/:NIM', NilaiController.getOneNilaibyMahasiswa)
 
-router.get('/nilai-by/perkuliahan/:id_perkuliahan', NilaiController.getNilaiByPerkuliahan)
+router.get('/perkuliahan/:id_perkuliahan', NilaiController.getNilaiByPerkuliahan)
 
 export default router
