@@ -10,5 +10,4 @@ const sequelize = new Sequelize(
   { define: { freezeTableName: true } }
 )
 
-
 export default sequelize

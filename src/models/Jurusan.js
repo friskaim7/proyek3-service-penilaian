@@ -10,7 +10,6 @@ const Jurusan = db.define('Jurusan', {
   nip: {
     type: Sequelize.STRING,
     allowNull: false
-
   }
 })
 
