@@ -7,6 +7,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         primaryKey:true,
+      },
+      nim: {
+		type: Sequelize.STRING,
+        references:{
+          model:'Mahasiswa',
+          key:'nim',
+        },
+        onUpdate: 'cascade',
+        onDelete: 'set null'      
+      },
+	  semester: {
+        type: Sequelize.STRING,
+        references:{
+          model:'Mata_Kuliah',
+          key:'semester',
+        }
       }
     });
   },
