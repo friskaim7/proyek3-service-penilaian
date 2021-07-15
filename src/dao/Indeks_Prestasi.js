@@ -1,6 +1,5 @@
 import Indeks_Prestasi from '../models/Indeks_Prestasi.js'
 import Mahasiswa from '../models/Mahasiswa.js'
-import Mata_Kuliah from '../models/Mata_Kuliah.js'
 
 import sequelize from '../db.js'
 
@@ -20,20 +19,6 @@ export const insertOneIp = async (ip_semester,nim,semester) => {
       console.log("Ip Semester tidak ditemukan")
       throw error
     }
-	const matkul = await Studi.findOne({
-        where: {id: id}
-      })
-    if(matkul === null){
-      console.log("Mata Kuliah tidak ditemukan")
-      throw error
-    }
-	const semester = await matkul.findOne({
-		where: {semester:semester}
-	  })
-    if(semester === null){
-      console.log("Semester tidak ditemukan")
-      throw error
-    }
     const newIndeksPrestasi = await Indeks_Prestasi.create({
       ip_semester: ip_semester,
       semester semester,
@@ -45,55 +30,55 @@ export const insertOneIp = async (ip_semester,nim,semester) => {
   }
 }
 
-export const getOneIpBymatkul= async (id) => {
+export const getOneIpBymahasiswa= async (nim) => {
   try {
-    const nilaiakhir = await studi.findAll({
+    const indeksprestasi = await Indeks_Prestasi.findAll({
       where: {
-        id
+        nim
       }
     })
-    return nilaiakhir
+    return indeksprestasi
   } catch (error) {
-    return Promise.reject(new Error('Get nilai akhir by Mata Kuliah'))
+    return Promise.reject(new Error('Get ip by Mahasiswa'))
   }
 }
 
 export const getAllIndeksPrestasi = async () => {
   try {
-    const nilaiakhir = await Studi.findAll()
-    return nilaiakhir
+    const indeksprestasi = await Indeks_Prestasi.findAll()
+    return indeksprestasi
   } catch (error) {
-    return Promise.reject(new Error('Get all nilai gagal'))
+    return Promise.reject(new Error('Get all Indeks prestasi gagal'))
   }
 }
 
-export const destroyIndeksPrestasiByMataKuliah = async (id) => {
+export const destroyIndeksPrestasiBymahasiswa = async (nim) => {
   try {
-    const nilaiakhir = await studi.destroy({
+    const indeksprestasi = await Indeks_Prestasi.destroy({
       where: {
-        id
+        nim
       }
     })
-    return nilaiakhir
+    return indeksprestasi
   } catch (error) {
-    return Promise.reject(new Error('Delete Nilai Akhir by Mahasiswa gagal'))
+    return Promise.reject(new Error('Delete indeks prestasi by Mahasiswa gagal'))
   }
 }
 
-export const updateIndeksPrestasibyMatkul = async (id, nilai_akhir) => {
+export const updateIndeksPrestasibyMahasiswa = async (ip_semester,nim) => {
   try {
-    const nilai_akhir_mahasiswa = await Studi.update(
+    const indeksprestasi = await Indeks_Prestasi.update(
       {
-        nilai_akhir_mahasiswa: nilai_akhir
+        ip_semester: ip_semester
       },
       {
         where: {
-          id
+          nim
         },
         silent: true
       }
     )
-    return nilai_akkhir_mahasiswa[0]
+    return indeksprestasi[0]
   } catch (error) {
     console.error(error)
   }

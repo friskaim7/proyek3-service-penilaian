@@ -19,10 +19,6 @@ const indeks_prestasi = db.define('Indeks Prestasi', {
     },
   semester: {
       type: Sequelize.STRING,
-      references:{
-        model:'Mata_Kuliah',
-        key:'semester',
-      }
     }
 })
 
