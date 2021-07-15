@@ -3,10 +3,14 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Indeks_prestasi', {
-      ip_semester: {
+      id_ip: {
         type: Sequelize.STRING,
         allowNull: false,
         primaryKey:true,
+      },	
+      ip_semester: {
+        type: Sequelize.DOUBLE,
+        allowNull: false,
       },
       nim: {
 		type: Sequelize.STRING,
