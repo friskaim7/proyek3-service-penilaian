@@ -10,7 +10,6 @@ const nilai = require('./models/Nilai)
 const kategoriNilai = require('./models/Kategori_Nilai)
 
 
-
 const setAssociations = () => {
   programStudi.hasMany(mataKuliah, {
     foreignKey: 'kode_program_studi'
@@ -42,7 +41,6 @@ const setAssociations = () => {
   dosen.hasMany(kategoriNilai, {
     foreignKey: 'nip'
   })  
-
   jabatan.hasOne(dosen, {
     foreignKey: 'id_jabatan'
   })
@@ -64,7 +62,6 @@ const setAssociations = () => {
    kategoriNilai.hasMany(nilai, {
     foreignKey: 'id_kategori'
   }) 
-
 }
 
 module.exports = setAssociations

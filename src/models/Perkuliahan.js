@@ -20,7 +20,6 @@ const Perkuliahan = db.define('Perkuliahan', {
   kode_kelas: {
     type: Sequelize.INTEGER,
     allowNull: false
-
   }
 })
 
