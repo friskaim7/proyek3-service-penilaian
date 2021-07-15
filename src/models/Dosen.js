@@ -4,12 +4,14 @@ import db from '../db'
 const Dosen = db.define('Dosen', {
   nip: {
     type: Sequelize.STRING,
+
     allowNull: false,
     primaryKey: true
   },
   nama_dosen: {
     type: Sequelize.STRING(30),
     allowNull: false
+
   }
 })
 

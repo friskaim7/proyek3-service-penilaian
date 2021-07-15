@@ -7,6 +7,7 @@ const Mahasiswa = db.define('Mahasiswa', {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true
+
   },
   nama: {
     type: Sequelize.STRING(30),
@@ -15,6 +16,7 @@ const Mahasiswa = db.define('Mahasiswa', {
   kode_kelas: {
     type: Sequelize.INTEGER,
     allowNull: true
+
   },
   email: {
     type: Sequelize.STRING,
@@ -27,6 +29,7 @@ const Mahasiswa = db.define('Mahasiswa', {
   url_foto: {
     type: Sequelize.STRING,
     allowNull: true
+
   }
 })
 

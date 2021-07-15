@@ -11,6 +11,7 @@ const Jabatan = db.define('Jabatan', {
   nama_jabatan: {
     type: Sequelize.STRING,
     allowNull: false
+
   }
 })
 

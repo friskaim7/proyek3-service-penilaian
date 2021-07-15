@@ -14,4 +14,5 @@ const Pengajar = db.define('Pengajar', {
 })
 Pengajar.removeAttribute('id')
 
+
 export default Pengajar
