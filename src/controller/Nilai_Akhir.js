@@ -68,6 +68,8 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     var nim = req.params.nim
     const dataNilai = await StudiDAO.findStudiByNIM(nim)
     var listResult = []
+    var totalIndeks = 0
+    var totalSks = 0
     for(var i = 0; i<dataNilai.length; i++){
       const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
       const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
@@ -87,6 +89,12 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
       return a.semester - b.semester
     })
 
+    for(var j=0; j<listResult.length; j++){
+      totalIndeks += listResult[j].nilai_akhir * listResult[j].sks
+      totalSks += listResult[j].sks
+    }
+    var ip = totalIndeks / totalSks
+
     if (dataNilai === undefined || listResult === null) {
       console.log('Get nilai akhir by mahasiswa gagal')
       throw error
@@ -95,7 +103,55 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     res.status(200).json({
       message: 'Get nilai akhir by mahasiswa sukses',
       data: {
-        listResult
+        dataNilaiAkhir: listResult,
+        jumlahSks: totalSks,
+        IPK: ip
+      }
+    })
+  } catch(error) {
+    next(error)
+  }
+}
+export const getNilaiAkhirSemesterByMahasiswa = async (req, res, next) => {
+  try {
+    var nim = req.params.nim
+    var smt = req.params.semester
+    const dataNilai = await StudiDAO.findStudiByNIM(nim)
+    var listResult = []
+    var totalIndeks = 0
+    var totalSks = 0
+    for(var i = 0; i<dataNilai.length; i++){
+      const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
+      const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
+      if(matkul.semester == smt){
+        const result2 = {
+          semester: matkul.semester,
+          kode_matkul: matkul.id,
+          nama_matkul: matkul.nama_mata_kuliah,
+          // sks_teori: matkul.sks_teori,
+          // sks_praktek: matkul.sks_praktek,
+          sks: matkul.sks_teori + matkul.sks_praktek,
+          nilai_akhir: dataNilai[i].nilai_akhir
+        }
+        listResult.push(result2)
+        }
+      }
+      for(var j=0; j<listResult.length; j++){
+        totalIndeks += listResult[j].nilai_akhir * listResult[j].sks
+        totalSks += listResult[j].sks
+      }
+    var ip = totalIndeks / totalSks
+    if (dataNilai === undefined || listResult === null) {
+      console.log('Get nilai akhir by mahasiswa gagal')
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'Get nilai akhir by mahasiswa sukses',
+      data: {
+        dataNilaiAkhir: listResult,
+        jumlahSks: totalSks,
+        IPS: ip
       }
     })
   } catch(error) {
