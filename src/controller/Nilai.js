@@ -74,10 +74,17 @@ export const getNilaiByPerkuliahan = async (req, res, next) => {
     const idPerkuliahan = req.params.id_perkuliahan
     const kategori = await kategoriNilaiDAO.findKategoriByPerkuliahan(idPerkuliahan)
     var listKategori = []
-
+    var dataKategori = []
     for (var i = 0; i < kategori.length; i++){
       var kode_kategori = kategori[i].kode_kategori
+      var ktgr = {
+        kode_kategori: kategori[i].kode_kategori,
+        parent: kategori[i].parent,
+        nama_kategori: kategori[i].nama_kategori,
+        bobot_nilai: kategori[i].bobot_nilai
+      }
       listKategori.push(kode_kategori)
+      dataKategori.push(ktgr)
     }
 
     const allNilai = await NilaiDAO.getNilaiByListKategoriPerkuliahan(listKategori)
@@ -89,7 +96,8 @@ export const getNilaiByPerkuliahan = async (req, res, next) => {
     res.status(200).json({
       message: 'get all nilai success',
       data: {
-        allNilai
+        dataKategori: dataKategori,
+        dataNilai: allNilai
       }
     })
   } catch(error){
