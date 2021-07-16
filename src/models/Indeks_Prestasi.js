@@ -3,10 +3,14 @@ import Sequelize from 'sequelize'
 import db from '../db'
 
 const indeks_prestasi = db.define('Indeks Prestasi', {
-    ip_semester: {
+    id_ip: {
       type: Sequelize.STRING,
       allowNull: false,
       primaryKey:true,
+    },
+    ip_semester: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     nim: {
 	  type: Sequelize.STRING,

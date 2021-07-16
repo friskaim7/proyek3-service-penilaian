@@ -12,7 +12,7 @@ export const updateIndeksPrestasi = async (req, res, next) => {
     
     for(var i = 0; i<dataip_semester.length; i++){
       var nim = dataip_semester[i].nim
-      const recordip_semester = await IndeksprestasiDAO.updateIndeksPrestasibyMahasiswa(ip_semester,nim)
+      const recordip_semester = await IndeksPrestasiDAO.updateIndeksPrestasibyMahasiswa(ip_semester,nim)
       listip_semester.push(recordip_semester)
     }
 
@@ -57,9 +57,10 @@ export const getIndeksPrestasibyMahasiswa = async (req, res, next) => {
     next(error)
   }
 }
-export const postNewNilaiAkhir = async (req, res, next) => {
+export const postNewIndeksPrestasi = async (req, res, next) => {
   try {
     const {
+	  id_ip,
       ip_semester,
 	  nim,
 	  semester
@@ -71,7 +72,7 @@ export const postNewNilaiAkhir = async (req, res, next) => {
       throw error
     }
 
-    const indeksPrestasiInsert = await IndeksPrestasiDAO.insertOneIp(ip_semester,nim,semester)
+    const indeksPrestasiInsert = await IndeksPrestasiDAO.insertOneIp(id_ip,ip_semester,nim,semester)
 
     if (typeof indeksPrestasiInsert === 'undefined') {
       error.status = 500
@@ -90,10 +91,10 @@ export const postNewNilaiAkhir = async (req, res, next) => {
   }
 }
 
-export const deleteNilaiAkhirbyMaahasiswa = async (req, res, next) => {
+export const deleteIndeksPrestasibyMaahasiswa = async (req, res, next) => {
   try {
-    const ip_semester = req.params.ip_semester
-    const result = await NilaiAkhirDAO.deleteNilaiAkhirbyMatkul(nilaiakhirId)
+    const ip_semesterId = req.params.id_ip
+    const result = await IndeksPrestasiDAO.deleteIndeksPrestasibyMahasiswa(nim)
     if (result === 1) {
       res.status(200).json({
         message: 'Delete nilai berhasil',
@@ -111,11 +112,11 @@ export const deleteNilaiAkhirbyMaahasiswa = async (req, res, next) => {
   }
 }
 
-export const getAllNilaiAkhir = async (req, res, next) => {
+export const getAllIndeksPrestasi = async (req, res, next) => {
   try {
-    const nilai = await NilaiAkhirDAO.getAllNilaiAkhir()
+    const nilai = await IndeksPrestasiDAO.getAllIndeksPrestasi()
     res.status(200).json({
-      message: 'get all nilai akhir success',
+      message: 'get all indeks prestasi success',
       data: {
         nilai
       }
@@ -148,14 +149,14 @@ export const updateNilaiAkhirbyMatkul = async (req, res, next) => {
   }
 }
 
-export const getOneNilaiAkhirbyMatkul = async (req, res, next) => {
+export const getOneIpBymahasiswa = async (req, res, next) => {
   try {
-    const { id_studi } = req.params
-    const nilai_akhir = await NilaiAkhirDAO.getOneNilaiAkhirbyMatkul(id_studi)
+    const { id_ip } = req.params
+    const indeksprestasi = await IndeksPrestasiDAO.getOneIpBymahasiswa(nim)
     res.status(200).json({
-      message: 'get one Nilai Akhir by Markul success',
+      message: 'get one Indeks Prestasi by Mahasiswa success',
       data: {
-        id_studi
+        id_ip
       }
     })
   } catch (error) {

@@ -3,26 +3,28 @@ import Mahasiswa from '../models/Mahasiswa.js'
 
 import sequelize from '../db.js'
 
-export const insertOneIp = async (ip_semester,nim,semester) => {
+export const insertOneIp = async (id_ip,ip_semester,nim,semester) => {
   try {
-    const indeks_prestasi = await Indeks_Prestasi.findOne({
-      where : {ip_semester: ip_semester}
+    const id_indeksprestasi = await Indeks_Prestasi.findOne({
+      where : {id_ip: id_ip}
     })
-    if(indeks_prestasi === null){
+    if(id_indeksprestasi === null){
       console.log("Ip Semester tidak ditemukan")
       throw error
     }
     const mahasiswa = await Mahasiswa.findOne({
       where : {nim: nim}
     })
-    if(indeks_prestasi === null){
-      console.log("Ip Semester tidak ditemukan")
+    if(mahasiswa === null){
+      console.log("Mahasiswa tidak ditemukan")
       throw error
     }
+	
     const newIndeksPrestasi = await Indeks_Prestasi.create({
+	  id_ip:id_ip
       ip_semester: ip_semester,
-      semester semester,
       nim: nim,
+      semester semester
     })
     return newIndeksPrestasi
   } catch (error) {
