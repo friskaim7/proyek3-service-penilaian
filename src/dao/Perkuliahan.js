@@ -13,7 +13,19 @@ export const findPerkuliahanById = async (id) => {
     } catch (error) {
       return Promise.reject(new Error('Find Perkuliahan by id gagal'))
     }
+}
+export const findPerkuliahanByListId = async (listId) => {
+  try {
+    const perkuliahan = await Perkuliahan.findAll({
+      where: {
+        id: listId
+      }
+    })
+    return perkuliahan
+  } catch (error) {
+    return Promise.reject(new Error('Find Perkuliahan by id gagal'))
   }
+}
 
   export const findPerkuliahanByMatkul = async (id) => {
     try {
