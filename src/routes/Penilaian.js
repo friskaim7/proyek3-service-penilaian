@@ -1,4 +1,5 @@
 import express from 'express'
+import * as FinalisasiNilai from '../controller/FinalisasiNilai'
 import * as NilaiController from '../controller/Nilai'
 import * as NilaiAkhirController from '../controller/Nilai_Akhir'
 import * as ValidatorSanitizer from '../middleware/InputValidatorSanitizer'
@@ -15,4 +16,5 @@ router.get('/get-nilai-akhir/perkuliahan/:id_perkuliahan', NilaiAkhirController.
 router.get('/get-all-nilai-akhir/mahasiswa/:nim', NilaiAkhirController.getNilaiAkhirByMahasiswa)
 router.get('/get-nilai-akhir/mahasiswa/:nim/semester/:semester', NilaiAkhirController.getNilaiAkhirSemesterByMahasiswa)
 
+router.post('/finalisasi/perkuliahan/:id_perkuliahan', FinalisasiNilai.FinalisasiNilai)
 export default router
