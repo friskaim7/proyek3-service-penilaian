@@ -87,19 +87,21 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     for(var i = 0; i<dataNilai.length; i++){
       const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
       const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
+      var nilaiChar = ["A","AB","B","BC","C","CD","D","E"]
       const result = {
         KodeMK: matkul.id,
         MataKuliah: matkul.nama_mata_kuliah,
         SKS: matkul.sks_teori + matkul.sks_praktek,
-        Nilai: dataNilai[i].nilai_akhir
+        Nilai: nilaiChar[Math.floor(Math.random()*nilaiChar.length)] //dataNilai[i].nilai_akhir
       }
       listResult[matkul.semester - 1].totalIndeks += result.Nilai
       listResult[matkul.semester - 1].JumlahSKS += result.SKS
       listResult[matkul.semester - 1].NilaiSemester.push(result)
     }
     //Menghitung ips
+    var nilaiIP = [4.00,3.50,3.00,2.50]
     for (var j=0; j<listResult.length; j++){
-      listResult[j].IPSemester = listResult[j].totalIndeks / listResult[j].JumlahSKS
+      listResult[j].IPSemester = nilaiIP[Math.floor(Math.random()*nilaiIP.length)] // listResult[j].totalIndeks / listResult[j].JumlahSKS
     }
 
     if (dataNilai === undefined) {
