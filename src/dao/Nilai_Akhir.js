@@ -149,7 +149,7 @@ export const insertOneNilaiAkhir = async (id_studi,nilai_akhir,id) => {
 
 export const getOneNilaiAkhirBymatkul= async (id) => {
   try {
-    const nilaiakhir = await studi.findAll({
+    const nilaiakhir = await Studi.findAll({
       where: {
         id
       }

@@ -3,6 +3,7 @@ import * as StudiDAO from '../dao/Studi'
 import * as PerkuliahanDAO from '../dao/Perkuliahan'
 import * as MatkulDAO from '../dao/Mata Kuliah'
 import * as MahasiswaDAO from '../dao/Mahasiswa'
+import * as KelasDAO from '../dao/Kelas'
 
 import expressValidator from 'express-validator/check'
 import Studi from '../models/Studi'
@@ -65,28 +66,87 @@ export const getNilaiAkhirByPerkuliahanDosen = async (req, res, next) => {
 }
 export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
   try {
-    var nim = req.params.nim
-    const dataNilai = await StudiDAO.findStudiByNIM(nim)
-    var listResult = []
+    var mhs = await MahasiswaDAO.findOneMahasiswaByNIM(req.params.nim)
+    const dataMahasiswa = {
+      nama: mhs.nama,
+      nim: mhs.nim,
+      kode_kelas: mhs.kode_kelas
+    }
+    var listResult = new Array(8)
+    for (var l=0; l<listResult.length; l++){
+      listResult[l] = {
+        label: "SEM-" + (l+1),
+        IPSemester: 0,
+        totalIndeks: 0,
+        JumlahSKS: 0,
+        NilaiSemester: []
+      }
+    }
+    const dataNilai = await StudiDAO.findStudiByNIM(mhs.nim)
+
     for(var i = 0; i<dataNilai.length; i++){
       const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
       const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
-      const result2 = {
-        semester: matkul.semester,
-        kode_matkul: matkul.id,
-        nama_matkul: matkul.nama_mata_kuliah,
-        // sks_teori: matkul.sks_teori,
-        // sks_praktek: matkul.sks_praktek,
-        sks: matkul.sks_teori + matkul.sks_praktek,
-        nilai_akhir: dataNilai[i].nilai_akhir
+      const result = {
+        KodeMK: matkul.id,
+        MataKuliah: matkul.nama_mata_kuliah,
+        SKS: matkul.sks_teori + matkul.sks_praktek,
+        Nilai: dataNilai[i].nilai_akhir
       }
-      listResult.push(result2)
+      listResult[matkul.semester - 1].totalIndeks += result.Nilai
+      listResult[matkul.semester - 1].JumlahSKS += result.SKS
+      listResult[matkul.semester - 1].NilaiSemester.push(result)
     }
-    //sorting by semester
-    listResult.sort((a,b) => {
-      return a.semester - b.semester
-    })
+    //Menghitung ips
+    for (var j=0; j<listResult.length; j++){
+      listResult[j].IPSemester = listResult[j].totalIndeks / listResult[j].JumlahSKS
+    }
 
+    if (dataNilai === undefined) {
+      console.log('Get nilai akhir by mahasiswa gagal')
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'Get nilai akhir by mahasiswa sukses',
+      data: {
+        Mahasiswa: dataMahasiswa,
+        Nilai: listResult
+      }
+    })
+  } catch(error) {
+    next(error)
+  }
+}
+export const getNilaiAkhirSemesterByMahasiswa = async (req, res, next) => {
+  try {
+    var nim = req.params.nim
+    var smt = req.params.semester
+    const dataNilai = await StudiDAO.findStudiByNIM(nim)
+    var listResult = []
+    var totalIndeks = 0
+    var totalSks = 0
+    for(var i = 0; i<dataNilai.length; i++){
+      const perkuliahan = await PerkuliahanDAO.findPerkuliahanById(dataNilai[i].id_perkuliahan)
+      const matkul = await MatkulDAO.findMatkulById(perkuliahan.id_mata_kuliah)
+      if(matkul.semester == smt){
+        const result2 = {
+          semester: matkul.semester,
+          kode_matkul: matkul.id,
+          nama_matkul: matkul.nama_mata_kuliah,
+          // sks_teori: matkul.sks_teori,
+          // sks_praktek: matkul.sks_praktek,
+          sks: matkul.sks_teori + matkul.sks_praktek,
+          nilai_akhir: dataNilai[i].nilai_akhir
+        }
+        listResult.push(result2)
+        }
+      }
+      for(var j=0; j<listResult.length; j++){
+        totalIndeks += listResult[j].nilai_akhir * listResult[j].sks
+        totalSks += listResult[j].sks
+      }
+    var ip = totalIndeks / totalSks
     if (dataNilai === undefined || listResult === null) {
       console.log('Get nilai akhir by mahasiswa gagal')
       throw error
@@ -95,7 +155,9 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     res.status(200).json({
       message: 'Get nilai akhir by mahasiswa sukses',
       data: {
-        listResult
+        dataNilaiAkhir: listResult,
+        jumlahSks: totalSks,
+        IPS: ip
       }
     })
   } catch(error) {
