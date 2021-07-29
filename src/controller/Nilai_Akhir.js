@@ -73,6 +73,8 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
       kode_kelas: mhs.kode_kelas
     }
     var listResult = new Array(8)
+    var ipk =0 ,sks =0, indeks = 0
+
     for (var l=0; l<listResult.length; l++){
       listResult[l] = {
         label: "SEM-" + (l+1),
@@ -100,7 +102,13 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     //Menghitung ips
     for (var j=0; j<listResult.length; j++){
       listResult[j].ips = listResult[j].totalIndeks / listResult[j].totalSks
+      sks += listResult[j].totalSks
+      indeks += listResult[j].totalIndeks
     }
+
+    ipk = indeks/sks
+    console.log(indeks,sks,ipk)
+
 
     if (dataNilai === undefined) {
       console.log('Get nilai akhir by mahasiswa gagal')
@@ -110,7 +118,10 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
     res.status(200).json({
       message: 'Get nilai akhir by mahasiswa sukses',
       data: {
-        Mahasiswa: dataMahasiswa,
+        Nama: dataMahasiswa.nama,
+        Kelas: dataMahasiswa.kode_kelas,
+        NIM: dataMahasiswa.nim,
+        IPK: ipk,
         Nilai: listResult
       }
     })
