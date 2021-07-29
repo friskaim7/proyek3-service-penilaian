@@ -93,7 +93,7 @@ export const getNilaiAkhirByMahasiswa = async (req, res, next) => {
         sks: matkul.sks_teori + matkul.sks_praktek,
         nilai_akhir: dataNilai[i].nilai_akhir
       }
-      listResult[matkul.semester - 1].totalIndeks += result.nilai_akhir
+      listResult[matkul.semester - 1].totalIndeks += (result.nilai_akhir * result.sks)
       listResult[matkul.semester - 1].totalSks += result.sks
       listResult[matkul.semester - 1].nilaiSemester.push(result)
     }
