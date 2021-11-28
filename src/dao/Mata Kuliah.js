@@ -1,15 +1,24 @@
 import MataKuliah from '../models/Mata_Kuliah'
-import sequelize from '../db.js'
+// import sequelize from '../db.js'
 
 export const findMatkulById = async (id) => {
-    try {
-      const matkul = await MataKuliah.findAll({
-        where: {
-          id: id
-        }
-      })
-      return matkul[0]
-    } catch (error) {
-      return Promise.reject(new Error('Find Pengajar by NIP gagal'))
-    }
+  try {
+    const matkul = await MataKuliah.findAll({
+      where: {
+        id: id
+      }
+    })
+    return matkul[0]
+  } catch (error) {
+    return Promise.reject(new Error('Find Pengajar by NIP gagal'))
   }
+}
+
+export const findAllMatkul = async () => {
+  try {
+    const matkul = await MataKuliah.findAll()
+    return matkul
+  } catch (error) {
+    return Promise.reject(new Error('Find all mata kuliah gagal'))
+  }
+}
