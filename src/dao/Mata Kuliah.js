@@ -45,3 +45,16 @@ export const insertOneMatkul = async (
     console.error(error)
   }
 }
+
+export const deleteMatkulbyId = async (Id) => {
+  try {
+    const result = await MataKuliah.destroy({
+      where: {
+        id: Id
+      }
+    })
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
