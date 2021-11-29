@@ -107,3 +107,32 @@ export const postNewMatkul = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getAllMatkul = async (req, res, next) => {
+  try {
+    const matkul = await MatkulDAO.findAllMatkul()
+    res.status(200).json({
+      message: 'get all matkul success',
+      data: {
+        matkul
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getOneMatkulById = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const matkul = await MatkulDAO.findMatkulById(id)
+    res.status(200).json({
+      message: 'get one Matkul by Id success',
+      data: {
+        matkul
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
