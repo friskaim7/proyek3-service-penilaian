@@ -136,3 +136,24 @@ export const getOneMatkulById = async (req, res, next) => {
     next(error)
   }
 }
+
+export const deleteMatkulbyId = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const result = await MatkulDAO.deleteMatkulbyId(id)
+    if (result === 1) {
+      res.status(200).json({
+        message: 'Delete matkul berhasil',
+        data: {
+          id
+        }
+      })
+    } else {
+      const error = new Error('Delete matkul gagal')
+      error.statusCode = 500
+      throw error
+    }
+  } catch (error) {
+    next(error)
+  }
+}
