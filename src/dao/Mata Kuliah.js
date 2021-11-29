@@ -10,7 +10,7 @@ export const findMatkulById = async (id) => {
     })
     return matkul[0]
   } catch (error) {
-    return Promise.reject(new Error('Find Pengajar by NIP gagal'))
+    return Promise.reject(new Error('Find Matkul by ID gagal'))
   }
 }
 
