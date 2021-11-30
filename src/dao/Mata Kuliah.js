@@ -58,3 +58,33 @@ export const deleteMatkulbyId = async (Id) => {
     console.log(error)
   }
 }
+
+export const updateDataMatkul = async (
+  id,
+  semester,
+  namaMataKuliah,
+  sksTeori,
+  sksPraktik,
+  kodeProgramStudi
+) => {
+  try {
+    const matkul = await MataKuliah.update(
+      {
+        semester: semester,
+        nama_mata_kuliah: namaMataKuliah,
+        sks_teori: sksTeori,
+        sks_praktek: sksPraktik,
+        kode_program_studi: kodeProgramStudi
+      },
+      {
+        where: {
+          id
+        },
+        silent: true
+      }
+    )
+    return matkul[0]
+  } catch (error) {
+    console.error(error)
+  }
+}
