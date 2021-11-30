@@ -30,12 +30,12 @@ export const findMahasiswaByName = async (nama) => {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
         nama_mahasiswa: sequelize.where(
-          sequelize.fn('LOWER', sequelize.col('nama_mahasiswa')),
+          sequelize.fn('LOWER', sequelize.col('nama')),
           'LIKE',
           '%' + nama.toLowerCase() + '%'
         )
       },
-      order: [['nama_mahasiswa', 'ASC']]
+      order: [['nama', 'ASC']]
     })
     return mahasiswa
   } catch (error) {
