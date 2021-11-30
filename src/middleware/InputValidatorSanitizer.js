@@ -2,7 +2,7 @@ import expressValidator from 'express-validator';
 const { body, param } = expressValidator;
 import * as DosenDAO from '../dao/Dosen'
 import * as MahasiswaDAO from '../dao/Mahasiswa'
-
+import * as MatkulDAO from '../dao/Mata Kuliah'
 
 // CATATAN : File ini berisi middleware untuk memvalidasi dan sanitasi inputan yang dikirim oleh user
 
