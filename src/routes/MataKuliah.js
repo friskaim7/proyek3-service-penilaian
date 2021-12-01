@@ -4,7 +4,7 @@ import * as ValidatorSanitizer from '../middleware/InputValidatorSanitizer'
 
 const router = express.Router()
 
-router.get('/listSemester', MataKuliahController.getListSemester)
+router.get('/list-semester', MataKuliahController.getListSemester)
 router.post('/new-matkul', ValidatorSanitizer.postNewMatkul, MataKuliahController.postNewMatkul)
 router.get('/all-matkul', MataKuliahController.getAllMatkul)
 router.get('/get-one/:id', MataKuliahController.getOneMatkulById)
