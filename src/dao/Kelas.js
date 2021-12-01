@@ -36,3 +36,16 @@ export const insertOneKelas = async (
     console.error(error)
   }
 }
+
+export const deleteKelasbyKodekelas = async (kodekelas) => {
+  try {
+    const result = await Kelas.destroy({
+      where: {
+        kode_kelas: kodekelas
+      }
+    })
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}

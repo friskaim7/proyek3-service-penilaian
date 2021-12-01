@@ -130,3 +130,24 @@ export const postNewKelas = async (req, res, next) => {
     next(error)
   }  
 }
+
+export const deleteKelasbyKodekelas = async (req, res, next) => {
+  try {
+    const { kodekelas } = req.params
+    const result = await KelasDAO.deleteKelasbyKodekelas(kodekelas)
+    if (result === 1) {
+      res.status(200).json({
+        message: 'Delete kelas berhasil',
+        data: {
+          kodekelas
+        }
+      })
+    } else {
+      const error = new Error('Delete kelas gagal')
+      error.statusCode = 500
+      throw error
+    }
+  } catch (error) {
+    next(error)
+  }
+}
