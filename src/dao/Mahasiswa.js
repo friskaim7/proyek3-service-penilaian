@@ -98,11 +98,11 @@ export const updateNomorHpMahasiswa = async (NIM, nomorHP) => {
   }
 }
 
-export const deleteMahasiswabyId = async (mahasiswaId) => {
+export const deleteMahasiswabyNIM = async (mahasiswaId) => {
   try {
     const result = await Mahasiswa.destroy({
       where: {
-        id_mahasiswa: mahasiswaId
+        nim: mahasiswaId
       }
     })
     return result

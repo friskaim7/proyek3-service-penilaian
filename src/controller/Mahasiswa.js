@@ -73,10 +73,10 @@ export const updateNomorHpMahasiswa = async (req, res, next) => {
   }
 }
 
-export const deleteMahasiswabyId = async (req, res, next) => {
+export const deleteMahasiswabyNIM = async (req, res, next) => {
   try {
-    const mahasiswaId = req.params.id_mahasiswa
-    const result = await MahasiswaDAO.deleteMahasiswabyId(mahasiswaId)
+    const mahasiswaId = req.params.NIM
+    const result = await MahasiswaDAO.deleteMahasiswabyNIM(mahasiswaId)
     if (result === 1) {
       res.status(200).json({
         message: 'Delete mahasiswa berhasil',
