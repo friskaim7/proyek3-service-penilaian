@@ -60,3 +60,17 @@ export const getListTahun = async (req, res) => {
     res.status(error.status).json({ error })
   }
 }
+
+export const getAllKelas = async (req, res, next) => {
+  try {
+    const kelas = await KelasDAO.findAllKelas()
+    res.status(200).json({
+      message: 'get all kelas success',
+      data: {
+        kelas
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
