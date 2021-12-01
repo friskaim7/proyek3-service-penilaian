@@ -47,15 +47,10 @@ export const findMahasiswaByNIM = async (NIM) => {
   try {
     const mahasiswa = await Mahasiswa.findAll({
       where: {
-        NIM: sequelize.where(
-          sequelize.fn('LOWER', sequelize.col('nim')),
-          'LIKE',
-          '%' + NIM.toLowerCase() + '%'
-        )
-      },
-      order: [['nim', 'ASC']]
+        nim:NIM
+      }
     })
-    return mahasiswa
+    return mahasiswa[0]
   } catch (error) {
     console.error(error)
   }
