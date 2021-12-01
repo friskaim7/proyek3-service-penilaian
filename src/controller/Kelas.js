@@ -74,3 +74,18 @@ export const getAllKelas = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getOneKelasByKodekelas = async (req, res, next) => {
+  try {
+    const { kodekelas } = req.params
+    const kelas = await KelasDAO.findKelasByKodeKelas(kodekelas)
+    res.status(200).json({
+      message: 'get one kelas by kodekelas success',
+      data: {
+        kelas
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
