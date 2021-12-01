@@ -27,13 +27,10 @@ export const postNewMahasiswa = async (req, res, next) => {
     const mahasiswa = await MahasiswaDAO.insertOneMahasiswa(
       NIM,
       namaMahasiswa,
-      parseInt(angkatan),
-      parseInt(tingkat),
+      parseInt(angkatan+"0"+tingkat),
       email,
       nomorHp,
       urlFoto,
-      status,
-      username
     )
 
     if (typeof mahasiswa === 'undefined') {
