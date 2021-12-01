@@ -3,6 +3,6 @@ import * as KelasController from '../controller/Kelas'
 
 const router = express.Router()
 
-router.get('/listTahun', KelasController.getListTahun)
+router.get('/list-tahun', KelasController.getListTahun)
 
 export default router
