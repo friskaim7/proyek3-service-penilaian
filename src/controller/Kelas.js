@@ -1,6 +1,8 @@
 import * as PengajarDAO from '../dao/Pengajar'
 import * as PerkuliahaDAO from '../dao/Perkuliahan'
 import * as KelasDAO from '../dao/Kelas'
+import expressValidator from 'express-validator/check'
+const { validationResult } = expressValidator
 
 export const getKelasAjarByDosen = async (req, res, next) => {
   try {
@@ -88,4 +90,43 @@ export const getOneKelasByKodekelas = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+}
+
+export const postNewKelas = async (req, res, next) => {
+  try {
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+      error.status = 400
+      throw error
+    }
+
+    const {
+      kodeKelas,
+      kodeProgramStudi,
+      NIP,
+      Tahun,
+    } = req.body
+
+    const kelas = await KelasDAO.insertOneKelas(
+      parseInt(kodeKelas),
+      kodeProgramStudi,
+      NIP,
+      parseInt(Tahun)
+    )
+
+    if (typeof kelas === 'undefined') {
+      error.status = 500
+      error.message = 'Insert kelas gagal'
+      throw error
+    }
+
+    res.status(200).json({
+      message: 'insert kelas sukses',
+      data: {
+        kelas
+      }
+    })
+  } catch (error) {
+    next(error)
+  }  
 }
